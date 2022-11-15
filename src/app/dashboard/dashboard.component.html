@@ -1,0 +1,2 @@
+<div>{{ response['aws'] }}</div>
+<app-widget *ngFor="let measure of response | keyvalue" [measureName]="measure.key" [measureValue]="measure.value"></app-widget>
