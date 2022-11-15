@@ -15,7 +15,7 @@ export class WidgetComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void{
-    console.log(this.measureValue);
+    
   }
 
 }
