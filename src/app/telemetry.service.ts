@@ -10,7 +10,7 @@ export class TelemetryService {
 
   constructor(private http: HttpClient) { }
 
-  getTelemetry(): Observable<any> {
+  getTelemetry(): Observable<Object> {
     return this.http.get(environment.telemetryUrl);
   }
 
