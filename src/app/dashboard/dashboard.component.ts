@@ -11,9 +11,7 @@ import { WidgetComponent } from '../widget/widget.component';
 export class DashboardComponent implements OnInit {
   private subscription: Subscription = Subscription.EMPTY;
   response: any = null;
-  name: string = 'prova';
-  value: string = '10';
-  selectedMeasurement = ['aws', 'awa', 'sog', 'cog'];
+  selectedMeasurement = ['aws', 'awa', 'sog', 'cog', 'mh'];
 
   constructor(private telemetry: TelemetryService) { }
 
@@ -21,7 +19,10 @@ export class DashboardComponent implements OnInit {
     this.subscription = timer(0, 2000).pipe(
       map(() => {
         this.telemetry.getTelemetry().subscribe(data => {
-          this.response = data;
+          this.response = data; // Object
+          const asArray = Object.entries(data);
+          const filtered = asArray.filter(([key, value]) => this.selectedMeasurement.includes(key));
+          this.response = Object.fromEntries(filtered);
         });
       })
     ).subscribe();
