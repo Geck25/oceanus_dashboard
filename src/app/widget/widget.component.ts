@@ -6,8 +6,8 @@ import { Component, OnInit, Input, Inject, SimpleChanges, OnChanges } from '@ang
   styleUrls: ['./widget.component.css']
 })
 export class WidgetComponent implements OnInit, OnChanges {
-  @Input() measureName: string = '';
-  @Input() measureValue: string = '';
+  @Input() measureName: any;
+  @Input() measureValue: any;
 
   constructor() {}
 
