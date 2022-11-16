@@ -7,18 +7,24 @@ import { AppComponent } from './app.component';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { WidgetComponent } from './widget/widget.component';
+import { TabbarComponent } from './tabbar/tabbar.component';
+
+/** Angular Material Imports */
+import { MatTabsModule } from '@angular/material/tabs';
 
 @NgModule({
   declarations: [
     AppComponent,
     DashboardComponent,
     WidgetComponent,
+    TabbarComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    NoopAnimationsModule
+    NoopAnimationsModule,
+    MatTabsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
