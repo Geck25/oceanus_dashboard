@@ -1,0 +1,6 @@
+<mat-tab-group>
+    <mat-tab *ngFor="let tab of tabs" [label]="tab">
+        <app-dashboard [tabName]="tab"></app-dashboard>
+    </mat-tab>
+</mat-tab-group>
+
