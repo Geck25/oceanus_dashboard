@@ -1,5 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { ConfigService } from '../services/config.service';
+import {MatDialog } from '@angular/material/dialog';
+import { PanelDialogComponent } from '../panel-dialog/panel-dialog.component';
+
+
+export interface DialogData {
+  selectedMeasurement: string,
+}
 
 @Component({
   selector: 'app-tabbar',
@@ -9,7 +16,7 @@ import { ConfigService } from '../services/config.service';
 export class TabbarComponent implements OnInit {
   tabs: string[] = [];
 
-  constructor(private configService: ConfigService) { }
+  constructor(private configService: ConfigService, public dialog: MatDialog) { }
 
   ngOnInit(): void {
     let cfg = this.configService.getConfig();
@@ -20,4 +27,11 @@ export class TabbarComponent implements OnInit {
     console.log(this.tabs);
   }
 
+  openDialog(): void {
+    const dialogRef = this.dialog.open(PanelDialogComponent, {
+      width: '250px'
+    });
+  }
+
 }
+
