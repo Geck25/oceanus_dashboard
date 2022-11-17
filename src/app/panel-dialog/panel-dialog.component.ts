@@ -10,6 +10,7 @@ import { ConfigService } from '../services/config.service';
 })
 export class PanelDialogComponent implements OnInit {
   panelName = new FormControl<string>('', {nonNullable: true});
+  selectedMeasure = new FormControl<string>('', {nonNullable: true});
   config: any = null;
 
   constructor(
@@ -28,18 +29,20 @@ export class PanelDialogComponent implements OnInit {
   addPanel(): void {
     var currentConfig = this.configService.getConfig();
     if (currentConfig === null) {
-      // dobbiamo costruire il json 
-      //let cfg: string = "{" + this.panelName.value + ": [] }";
+      // devo costruire il json 
+      let cfg: string = "{\"" + this.panelName.value + "\": [\"" + this.selectedMeasure.value + "\"] }";
+      this.configService.saveConfig(cfg);
     } else {
+      // se c'è già una configurazione faccio il parsing e aggiungo la nuova tab
       this.config = JSON.parse(currentConfig);
-      
-      this.config[this.panelName.value] = [];
+      this.config[this.panelName.value] = [this.selectedMeasure.value];
       let newCfg = JSON.stringify(this.config);
       this.configService.saveConfig(newCfg);
 
     }
-    console.log(this.panelName.value);
     this.dialogRef.close();
+    // permette di ricaricare la pagina e quindi di aggiornare la tab bar
+    window.location.reload();
   }
 
 }
