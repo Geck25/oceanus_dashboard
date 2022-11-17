@@ -2,4 +2,12 @@
     <mat-label>Nome pannello</mat-label>
     <input matInput type="text" [formControl]="panelName">
 </mat-form-field>
+<mat-form-field appearance="fill">
+    <mat-label>Widget 1</mat-label>
+    <mat-select [formControl]="selectedMeasure">
+        <mat-option value="aws">Apparent Wind Speed</mat-option>
+        <mat-option value="cog">Course Over Ground</mat-option>
+        <mat-option value="awa">Apparent Wind Angle</mat-option>
+    </mat-select>
+</mat-form-field>
 <button mat-raised-button (click)="addPanel()">Aggiungi</button>
