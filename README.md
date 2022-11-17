@@ -19,7 +19,7 @@ npm install
 ```
 Specificare l'url del server PHP (`!prestare attenzione ai nomi`)
 ```
-cd /path/to/oceanus_dashboard/src
+cd src/
 mkdir environments
 cd environments
 touch environment.ts
