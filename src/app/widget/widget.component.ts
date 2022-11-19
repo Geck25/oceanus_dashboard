@@ -1,4 +1,5 @@
-import { Component, OnInit, Input, Inject, SimpleChanges, OnChanges } from '@angular/core';
+import { Component, OnInit, Input, SimpleChanges, OnChanges } from '@angular/core';
+import { measures } from '../utils/measure';
 
 @Component({
   selector: 'app-widget',
@@ -8,10 +9,14 @@ import { Component, OnInit, Input, Inject, SimpleChanges, OnChanges } from '@ang
 export class WidgetComponent implements OnInit, OnChanges {
   @Input() measureName: any;
   @Input() measureValue: any;
+  measureFullName: string = '';
+  unitOfMeasurement: string = '';
 
   constructor() {}
 
   ngOnInit(): void {
+    this.measureFullName = measures[this.measureName].fullName;
+    this.unitOfMeasurement = measures[this.measureName].unitOfMeasurement;
   }
 
   ngOnChanges(changes: SimpleChanges): void{
