@@ -10,6 +10,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { WidgetComponent } from './widget/widget.component';
 import { TabbarComponent } from './tabbar/tabbar.component';
 import { PanelDialogComponent } from './panel-dialog/panel-dialog.component';
+import { WidgetGridComponent } from './widget-grid/widget-grid.component';
 
 /** Angular Material Imports */
 import { MatTabsModule } from '@angular/material/tabs';
@@ -18,6 +19,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSelectModule } from '@angular/material/select';
+import { MatChipsModule } from '@angular/material/chips';
 
 @NgModule({
   declarations: [
@@ -26,6 +28,7 @@ import { MatSelectModule } from '@angular/material/select';
     WidgetComponent,
     TabbarComponent,
     PanelDialogComponent,
+    WidgetGridComponent,
   ],
   imports: [
     BrowserModule,
@@ -38,7 +41,8 @@ import { MatSelectModule } from '@angular/material/select';
     MatFormFieldModule,
     MatDialogModule,
     MatInputModule,
-    MatSelectModule
+    MatSelectModule,
+    MatChipsModule
   ],
   exports: [
     MatFormFieldModule
