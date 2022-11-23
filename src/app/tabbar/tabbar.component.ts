@@ -24,12 +24,11 @@ export class TabbarComponent implements OnInit {
     for (var key in cfgObject) {
       this.tabs.push(key);
     }
-    console.log(this.tabs);
   }
 
   openDialog(): void {
     const dialogRef = this.dialog.open(PanelDialogComponent, {
-      width: '250px'
+      width: '500px'
     });
   }
 
