@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { map, Subscription, timer } from 'rxjs';
 import { ConfigService } from '../services/config.service';
 import { TelemetryService } from '../telemetry.service';
@@ -11,17 +12,19 @@ import { WidgetComponent } from '../widget/widget.component';
 })
 export class DashboardComponent implements OnInit {
   private subscription: Subscription = Subscription.EMPTY;
-  @Input() tabName: string = '';
   response: any = null;
   config: any = null;
   selectedMeasurement: string[] = [];
 
-  constructor(private telemetry: TelemetryService, private configService: ConfigService) { }
+  constructor(private telemetry: TelemetryService, private configService: ConfigService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    var configAsString = this.configService.getConfig();
+    const routeParams = this.route.snapshot.paramMap;
+    const panelName = String(routeParams.get('dashboard-name'));
+
+    let configAsString = this.configService.getConfig();
     this.config = JSON.parse(configAsString!);
-    this.selectedMeasurement = this.selectedMeasurement.concat(this.config[this.tabName]);
+    this.selectedMeasurement = this.selectedMeasurement.concat(this.config[panelName]);
 
     this.subscription = timer(0, 2000).pipe(
       map(() => {
