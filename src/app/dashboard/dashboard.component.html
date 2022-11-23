@@ -1,1 +1,3 @@
-<app-widget *ngFor="let measure of response | keyvalue" [measureName]="measure.key" [measureValue]="measure.value"></app-widget>
+<div class="widget-container">
+    <app-widget *ngFor="let measure of response | keyvalue" [measureName]="measure.key" [measureValue]="measure.value"></app-widget>
+</div>
