@@ -1,5 +1,6 @@
 <div class="navbar">
     <div class="panels-buttons">
+        <button mat-raised-button [routerLink]="['/home']">Home</button>
         <button mat-raised-button *ngFor="let tab of tabs" [routerLink]="['/dashboard', tab]">{{ tab }}</button>
     </div>
     <button mat-raised-button (click)="openDialog()">Aggiungi pannello</button>
