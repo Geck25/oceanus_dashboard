@@ -1,0 +1,7 @@
+<mat-chip-list [selectable]="true" [multiple]="true">
+    <!-- <mat-chip #c="matChip" *ngFor="let measure of measures" [value]="measure" (click)="toggleSelection(c)">
+                  {{ measure }}
+    </mat-chip> -->
+    <mat-chip #c="matChip" *ngFor="let measure of measures" [value]="measure" (click)="sendNewItemToParent(c)">{{ measure }}</mat-chip>
+</mat-chip-list>
+
