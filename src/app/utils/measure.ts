@@ -16,5 +16,6 @@ export const measures: Record<string, measureInfo> = {
     vmg: {fullName: 'Vmg', unitOfMeasurement: 'kt'},
     tws: {fullName: 'True Wind Speed', unitOfMeasurement: 'kt'},
     twa: {fullName: 'True Wind Angle', unitOfMeasurement: '°'},
-
+    lat: {fullName: 'Latitude', unitOfMeasurement: '°'},
+    lon: {fullName: 'Longitude', unitOfMeasurement: '°'}
 }
