@@ -11,6 +11,8 @@ import { WidgetComponent } from './widget/widget.component';
 import { TabbarComponent } from './tabbar/tabbar.component';
 import { PanelDialogComponent } from './panel-dialog/panel-dialog.component';
 import { WidgetGridComponent } from './widget-grid/widget-grid.component';
+import { RoutingStrategy } from './routing/RoutingStrategy';
+import { RouteReuseStrategy } from '@angular/router';
 
 /** Angular Material Imports */
 import { MatTabsModule } from '@angular/material/tabs';
@@ -45,9 +47,15 @@ import { MatChipsModule } from '@angular/material/chips';
     MatChipsModule
   ],
   exports: [
-    MatFormFieldModule
+    MatFormFieldModule,
+    PanelDialogComponent
   ],
-  providers: [],
+  providers: [
+    {
+      provide: RouteReuseStrategy,
+      useClass: RoutingStrategy
+    },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
