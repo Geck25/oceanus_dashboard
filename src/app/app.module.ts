@@ -13,6 +13,7 @@ import { PanelDialogComponent } from './panel-dialog/panel-dialog.component';
 import { WidgetGridComponent } from './widget-grid/widget-grid.component';
 import { RoutingStrategy } from './routing/RoutingStrategy';
 import { RouteReuseStrategy } from '@angular/router';
+import { HomeComponent } from './home/home.component';
 
 /** Angular Material Imports */
 import { MatTabsModule } from '@angular/material/tabs';
@@ -31,6 +32,7 @@ import { MatChipsModule } from '@angular/material/chips';
     TabbarComponent,
     PanelDialogComponent,
     WidgetGridComponent,
+    HomeComponent,
   ],
   imports: [
     BrowserModule,
