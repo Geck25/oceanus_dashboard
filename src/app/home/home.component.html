@@ -1,6 +1,15 @@
-<div>
-    <span>Latitude: {{ lat }}</span>
-    <span>Longitude: {{ lon }}</span>
-    <p>{{ currentDate | date: "dd/MM/yyyy" }}</p>
-    <p>{{ currentDate | date: "HH:mm:ss" }}</p>
+<div class="main">
+    <div class="app-title">
+        <h1>Oceanus</h1>
+    </div>
+    <div class="info">
+        <div class="coordinates">
+            <p>Latitude: {{ lat }}</p>
+            <p>Longitude: {{ lon }}</p>
+        </div>
+        <div class="date">
+            <p>Date: {{ currentDate | date: "dd/MM/yyyy" }}</p>
+            <p>Time: {{ currentDate | date: "HH:mm:ss" }}</p>
+        </div>
+    </div>
 </div>
