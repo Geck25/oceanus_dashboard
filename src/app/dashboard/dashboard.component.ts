@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { map, Subscription, timer } from 'rxjs';
+import { filter, map, Subscription, timer } from 'rxjs';
 import { ConfigService } from '../services/config.service';
 import { TelemetryService } from '../telemetry.service';
 import { WidgetComponent } from '../widget/widget.component';
@@ -8,7 +8,10 @@ import { WidgetComponent } from '../widget/widget.component';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.css']
+  styleUrls: ['./dashboard.component.css'],
+  host: {
+    class: 'full-height'
+  }
 })
 export class DashboardComponent implements OnInit {
   private subscription: Subscription = Subscription.EMPTY;
@@ -31,8 +34,9 @@ export class DashboardComponent implements OnInit {
         this.telemetry.getTelemetry().subscribe(data => {
           this.response = data; // Object
           const asArray = Object.entries(data);
-          const filtered = asArray.filter(([key, value]) => this.selectedMeasurement.includes(key));
-          this.response = Object.fromEntries(filtered);
+          //const filtered = asArray.filter(([key, value]) => this.selectedMeasurement.includes(key));
+          // this.response = Object.fromEntries(filtered);
+          this.response = asArray.filter(([key, value]) => this.selectedMeasurement.includes(key));
         });
       })
     ).subscribe();
