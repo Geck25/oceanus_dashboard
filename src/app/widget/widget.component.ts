@@ -4,7 +4,10 @@ import { measures } from '../utils/measure';
 @Component({
   selector: 'app-widget',
   templateUrl: './widget.component.html',
-  styleUrls: ['./widget.component.css']
+  styleUrls: ['./widget.component.css'],
+  host: {
+    class: 'fl'
+  }
 })
 export class WidgetComponent implements OnInit, OnChanges {
   @Input() measureName: any;
