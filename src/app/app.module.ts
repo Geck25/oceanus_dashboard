@@ -23,7 +23,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSelectModule } from '@angular/material/select';
 import { MatChipsModule } from '@angular/material/chips';
-import {MatDividerModule} from '@angular/material/divider';
+import { MatDividerModule } from '@angular/material/divider';
 
 @NgModule({
   declarations: [
@@ -48,7 +48,7 @@ import {MatDividerModule} from '@angular/material/divider';
     MatInputModule,
     MatSelectModule,
     MatChipsModule,
-    MatDividerModule
+    MatDividerModule,
   ],
   exports: [
     MatFormFieldModule,
