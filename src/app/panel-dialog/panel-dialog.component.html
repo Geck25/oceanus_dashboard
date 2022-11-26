@@ -1,11 +1,17 @@
-<mat-dialog-content align="center">
-    <mat-form-field appearance="fill">
-        <mat-label>Nome pannello</mat-label>
-        <input matInput type="text" [formControl]="panelName">
-    </mat-form-field>
-    <app-widget-grid (submitSelectedMeasuresEvent)="addMeasure($event)"></app-widget-grid>
-    <div>
-        <span class="alert">{{ error }}</span>
+<mat-dialog-content align="center" class="content">
+    <div class="form-name">
+        <mat-form-field appearance="fill">
+            <mat-label>Nome pannello</mat-label>
+            <input matInput type="text" [formControl]="panelName">
+            <mat-error *ngIf="panelName.invalid">Il nome del pannello deve essere specificato</mat-error>
+        </mat-form-field>
     </div>
-    <button mat-raised-button (click)="addPanel()">Aggiungi</button>
+    <div class="widget-grid">
+        <app-widget-grid (submitSelectedMeasuresEvent)="addMeasure($event)"></app-widget-grid>
+    </div>
+    <mat-error *ngIf="widgetsOverflowError.length !=0">{{ widgetsOverflowError }}</mat-error>
+    <mat-error *ngIf="someError">Errore! controlla se è presente un nome per il pannello e se hai selezionato 4 widget</mat-error>
+    <div class="submit-button">
+        <button mat-raised-button (click)="addPanel()">Aggiungi</button>
+    </div>
 </mat-dialog-content>
