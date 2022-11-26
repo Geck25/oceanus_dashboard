@@ -4,9 +4,15 @@
     align-items: center;
     justify-content: center;
     flex: 1;
-    background-color: aquamarine;
+    /* background-color: aquamarine; */
 }
 
 span {
     font-size: 20px;
+}
+
+#full-name {
+    font-size: 40px;
+    font-weight: bold;
+    margin-bottom: 15px;
 }
