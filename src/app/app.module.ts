@@ -24,6 +24,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatSelectModule } from '@angular/material/select';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatDividerModule } from '@angular/material/divider';
+import { ToggleButtonComponent } from './toggle.button/toggle.button.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { MatDividerModule } from '@angular/material/divider';
     PanelDialogComponent,
     WidgetGridComponent,
     HomeComponent,
+    ToggleButtonComponent,
   ],
   imports: [
     BrowserModule,
