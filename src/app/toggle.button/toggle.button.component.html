@@ -1,0 +1,9 @@
+<button *ngIf="isHomeEndPoint; else noHomeEndPoint" mat-raised-button (click)="toggle()" [class.selected]="isSelected" [routerLink]="['/home']">
+   <span>Home</span>
+</button>
+
+<ng-template #noHomeEndPoint>
+    <button mat-raised-button (click)="toggle()" [class.selected]="isSelected" [routerLink]="['/dashboard', endPoint]">
+        <ng-content></ng-content>
+    </button>
+</ng-template>
