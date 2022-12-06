@@ -1,7 +1,8 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, ViewChild } from '@angular/core';
 import { ConfigService } from '../services/config.service';
 import {MatDialog } from '@angular/material/dialog';
 import { PanelDialogComponent } from '../panel-dialog/panel-dialog.component';
+import { ToggleButtonComponent } from '../toggle.button/toggle.button.component';
 
 
 export interface DialogData {
@@ -15,6 +16,8 @@ export interface DialogData {
 })
 export class TabbarComponent implements OnInit {
   tabs: string[] = [];
+  selectedButton: ToggleButtonComponent | null = null;
+  @ViewChild(ToggleButtonComponent) homeButton: ToggleButtonComponent | null = null;
 
   constructor(private configService: ConfigService, public dialog: MatDialog) { }
 
@@ -23,6 +26,21 @@ export class TabbarComponent implements OnInit {
     let cfgObject = JSON.parse(cfg!); 
     for (var key in cfgObject) {
       this.tabs.push(key);
+    }
+  }
+
+  ngAfterViewInit() {
+    this.selectedButton = this.homeButton;
+  }
+
+  toggleButton(button: ToggleButtonComponent) {
+    if (this.selectedButton === null) {
+      this.selectedButton = button;
+      button.toggleSelection();
+    } else {
+      this.selectedButton.toggleSelection();
+      this.selectedButton = button;
+      this.selectedButton.toggleSelection();
     }
   }
 
