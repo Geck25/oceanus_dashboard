@@ -24,7 +24,7 @@ export class TabbarComponent implements OnInit {
   ngOnInit(): void {
     let cfg = this.configService.getConfig();
     let cfgObject = JSON.parse(cfg!); 
-    for (var key in cfgObject) {
+    for (const [key, value] of Object.entries(cfgObject)) {
       this.tabs.push(key);
     }
   }
