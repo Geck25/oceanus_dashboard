@@ -1,6 +1,9 @@
-<div class="container">
-    <app-widget [measureName]="response[0][0]" [measureValue]="response[0][1]"></app-widget>
+<div class="container" [style.--col]="col" [style.--row]="row">
+    <ng-container *ngFor="let measure of response | keyvalue">
+        <app-widget [measureName]="measure.key" [measureValue]="measure.value"></app-widget>
+    </ng-container>
+    <!-- <app-widget [measureName]="response[0][0]" [measureValue]="response[0][1]"></app-widget>
     <app-widget [measureName]="response[1][0]" [measureValue]="response[1][1]"></app-widget>
     <app-widget [measureName]="response[2][0]" [measureValue]="response[2][1]"></app-widget>
-    <app-widget [measureName]="response[3][0]" [measureValue]="response[3][1]"></app-widget>
+    <app-widget [measureName]="response[3][0]" [measureValue]="response[3][1]"></app-widget> -->
 </div>
