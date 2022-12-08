@@ -1,5 +1,11 @@
-<div class="widgets">
-    <span id="full-name">{{ measureFullName }}</span>
-    <span>{{ measureName }}:</span>
-    <span> {{ measureValue }} [{{ unitOfMeasurement }}]</span>
-</div>
+<ng-container *ngIf="isCompass; else normal_widget">
+    <compass-widget [measureName]="measureName" [measureValue]="measureValue" [type]="compassType"></compass-widget>
+</ng-container>
+
+<ng-template #normal_widget>
+    <div class="widgets">
+        <span id="full-name">{{ measureFullName }}</span>
+        <span>{{ measureName }}:</span>
+        <span> {{ measureValue }} [{{ unitOfMeasurement }}]</span>
+    </div>
+</ng-template>
