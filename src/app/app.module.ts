@@ -25,6 +25,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatDividerModule } from '@angular/material/divider';
 import { ToggleButtonComponent } from './toggle.button/toggle.button.component';
+import { CompassWidgetComponent } from './compass-widget/compass-widget.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { ToggleButtonComponent } from './toggle.button/toggle.button.component';
     WidgetGridComponent,
     HomeComponent,
     ToggleButtonComponent,
+    CompassWidgetComponent,
   ],
   imports: [
     BrowserModule,
