@@ -1,13 +1,15 @@
 interface measureInfo {
     fullName: string;
     unitOfMeasurement: string;
+    isCompass?: boolean;
+    compassType?: string;
 }
 
 export const measures: Record<string, measureInfo> = {
     aws: {fullName: 'Apparent Wind Speed', unitOfMeasurement: 'kt'},
-    awa: {fullName: 'Apparent Wind Angle', unitOfMeasurement: '°'},
+    awa: {fullName: 'Apparent Wind Angle', unitOfMeasurement: '°', isCompass: true, compassType: 'non-regular'},
     sow: {fullName: 'Speed Over Water', unitOfMeasurement: 'kt'},
-    mh: {fullName: 'Magnetic Heading', unitOfMeasurement: '°'},
+    mh: {fullName: 'Magnetic Heading', unitOfMeasurement: '°', isCompass: true, compassType: 'regular'},
     cog: {fullName: 'Course Over Ground', unitOfMeasurement: '°'},
     sog: {fullName: 'Speed Over Ground', unitOfMeasurement: 'kt'},
     delta_vmg: {fullName: 'Delta VMG', unitOfMeasurement: 'kt'},
