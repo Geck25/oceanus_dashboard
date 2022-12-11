@@ -6,3 +6,17 @@
     grid-row-gap: 0px;
     height: 100%;
 }
+
+.sm-container {
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    gap: 10px;
+}
+
+#panel-name {
+    font-size: 20px;
+    font-weight: bold;
+    margin: 0 20px;
+}
