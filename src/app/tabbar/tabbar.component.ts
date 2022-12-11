@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, Inject, ViewChild, ElementRef, HostListener } from '@angular/core';
 import { ConfigService } from '../services/config.service';
 import {MatDialog } from '@angular/material/dialog';
 import { PanelDialogComponent } from '../panel-dialog/panel-dialog.component';
@@ -20,6 +20,7 @@ export class TabbarComponent implements OnInit {
   selectedButton: ToggleButtonComponent | null = null;
   @ViewChild(ToggleButtonComponent) homeButton: ToggleButtonComponent | null = null;
   @ViewChild('dmenu') dropdownMenu: ElementRef<HTMLDivElement>;
+  @ViewChild('modal') modal: ElementRef<HTMLDivElement>;
   useSideNav: boolean = false;
 
   constructor(
@@ -67,10 +68,21 @@ export class TabbarComponent implements OnInit {
   }
 
   openDialog(): void {
-    const dialogRef = this.dialog.open(PanelDialogComponent, {
-      width: '500px'
-    });
+    this.modal.nativeElement.style.display = 'flex';
   }
+
+  @HostListener('window:click', ['$event.target'])
+  onOutsideModalClick(target: HTMLElement) {
+    if (target === this.modal.nativeElement) {
+      this.modal.nativeElement.style.display = 'none';
+    }
+  }
+
+  // openDialog(): void {
+  //   const dialogRef = this.dialog.open(PanelDialogComponent, {
+  //     width: '500px'
+  //   });
+  // }
 
 }
 
