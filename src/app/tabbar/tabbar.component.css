@@ -8,3 +8,16 @@
     display: flex;
     gap: 10px;
 }
+
+.small-bar {
+    padding: 5px;
+    background-color: #3F51B5;
+}
+
+.panels {
+    display: none;
+}
+
+.list-item {
+    color: white;
+}
