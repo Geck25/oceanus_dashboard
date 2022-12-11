@@ -3,7 +3,7 @@ import { MatChip } from '@angular/material/chips';
 import { TelemetryService } from '../telemetry.service';
 
 @Component({
-  selector: 'app-widget-grid',
+  selector: 'widget-grid',
   templateUrl: './widget-grid.component.html',
   styleUrls: ['./widget-grid.component.css']
 })
