@@ -14,6 +14,8 @@ import { WidgetGridComponent } from './widget-grid/widget-grid.component';
 import { RoutingStrategy } from './routing/RoutingStrategy';
 import { RouteReuseStrategy } from '@angular/router';
 import { HomeComponent } from './home/home.component';
+import { ToggleButtonComponent } from './toggle.button/toggle.button.component';
+import { CompassWidgetComponent } from './compass-widget/compass-widget.component';
 
 /** Angular Material Imports */
 import { MatTabsModule } from '@angular/material/tabs';
@@ -24,8 +26,10 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatSelectModule } from '@angular/material/select';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatDividerModule } from '@angular/material/divider';
-import { ToggleButtonComponent } from './toggle.button/toggle.button.component';
-import { CompassWidgetComponent } from './compass-widget/compass-widget.component';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { LayoutModule } from '@angular/cdk/layout';
+import { MatIconModule } from '@angular/material/icon';
+import { MatListModule } from '@angular/material/list';
 
 @NgModule({
   declarations: [
@@ -53,6 +57,10 @@ import { CompassWidgetComponent } from './compass-widget/compass-widget.componen
     MatSelectModule,
     MatChipsModule,
     MatDividerModule,
+    MatSidenavModule,
+    LayoutModule,
+    MatIconModule,
+    MatListModule,
   ],
   exports: [
     MatFormFieldModule,
