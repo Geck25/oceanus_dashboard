@@ -2,11 +2,11 @@ import { Component, OnInit, Input, SimpleChanges, OnChanges } from '@angular/cor
 import { measures } from '../utils/measure';
 
 @Component({
-  selector: 'app-widget',
+  selector: 'widget',
   templateUrl: './widget.component.html',
   styleUrls: ['./widget.component.css'],
   host: {
-    class: 'fl'
+    class: 'fh'
   }
 })
 export class WidgetComponent implements OnInit, OnChanges {
