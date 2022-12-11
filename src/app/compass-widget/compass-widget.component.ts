@@ -1,34 +1,44 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, NgZone, OnInit, ViewChild } from '@angular/core';
+import { fromEvent, Observable, Subscription, take } from 'rxjs';
+import { measures } from '../utils/measure';
 
 @Component({
-  selector: 'compass-widget',
+  selector: 'compass',
   templateUrl: './compass-widget.component.html',
   styleUrls: ['./compass-widget.component.css'],
   host: {
-    class: 'full-height'
+    class: 'fh'
   }
 })
 export class CompassWidgetComponent implements OnInit {
   @ViewChild('canvas') canvas: any;
-  @Input() measureName: string = '';
-  @Input() measureValue: number = 0;
-  @Input() type: string = '';
+  @Input() selectedMeasure: any;
+  @Input() value: any;
+  type: string = '';
   context: CanvasRenderingContext2D | null = null;
+  resizeObservable$: Observable<Event> | null = null;
+  resizeSubscription$: Subscription = Subscription.EMPTY;
   drawFunction: any;
   currentValue: number = 0;
   angles: (number | string)[] = [0, 45, 90, 135, 180, 225, 270, 315];
 
-  constructor() { }
-
+  constructor(private ngZone: NgZone) {}
+  
   ngOnInit(): void {
-    this.currentValue = this.measureValue;
+    this.type = measures[this.selectedMeasure].compassType!;
     this.drawFunction = this.type === 'regular' ? this.drawRegular : this.drawAlternative;
-    this.setCanvasDimension();
+    this.currentValue = this.value;
+
+    // On resize event I want to re-render the canvas in order to adjust every dimension
+    this.resizeObservable$ = fromEvent(window, 'resize');
+    this.resizeSubscription$ = this.resizeObservable$.subscribe(event => {
+      this.drawFunction(this.currentValue);
+    })
   }
 
   ngAfterViewInit() {
     this.context = this.canvas!.nativeElement.getContext('2d');
-    this.setCanvasDimension();
+    this.setCanvasDimension()
     this.drawFunction(this.currentValue);
   }
 
@@ -88,11 +98,13 @@ export class CompassWidgetComponent implements OnInit {
   // FUNZIONE PER DISEGNARE LA BUSSOLA ALTERNATIVA                      |
   //---------------------------------------------------------------------
 
+
   drawAlternative(currentAngle: number): void {
     this.context!.clearRect(0, 0, this.canvas!.nativeElement.width, this.canvas!.nativeElement.height);
     let centerX: number = this.canvas!.nativeElement.width / 2;
     let centerY: number = this.canvas!.nativeElement.height / 2;
-    let canvasHeight: number = this.canvas!.nativeElement.height;
+    // let canvasHeight: number = this.canvas!.nativeElement.height;
+    let canvasHeight: number = this.shortestSide();
     this.drawCircle(centerX, centerY, canvasHeight * 0.37, 0, 2 * Math.PI);
     
     this.drawAnglesIndicators(-1, '0', 5); // 0
@@ -118,35 +130,43 @@ export class CompassWidgetComponent implements OnInit {
   }
 
   private setCanvasDimension(): void {
-    //let parent: any = this.canvas.nativeElement.parentElement.parentElement.parentElement.classList;
-    let parentWidth: number = this.canvas.nativeElement.parentElement.parentElement.parentElement.clientWidth;
-    let parentHeight: number = this.canvas.nativeElement.parentElement.parentElement.parentElement.clientHeight;
-    //let cHeight: number = this.canvas.nativeElement.parentElement.clientHeight;
+    let parentWidth: number = this.canvas.nativeElement.parentElement.clientWidth;
+    let parentHeight: number = this.canvas.nativeElement.parentElement.clientHeight;
     this.canvas.nativeElement.width = parentWidth;
     this.canvas.nativeElement.height = parentHeight - 1;
-    // console.log(`c height ${cHeight}`)
-    // console.log(`parent: ${parent} \n parentW: ${parentWidth}, parentH: ${parentHeight} \n canvasW: ${this.canvas.nativeElement.width}, canvasH: ${this.canvas.nativeElement.height}`)
+  }
+
+  /**
+   * 
+   * @returns la dimensione del lato più corto del componente genitore
+   */
+  private shortestSide(): number {
+    let parentWidth: number = this.canvas.nativeElement.parentElement.clientWidth;
+    let parentHeight: number = this.canvas.nativeElement.parentElement.clientHeight;
+    return parentWidth > parentHeight ? parentHeight : parentWidth;
   }
 
   private drawBoat(centerX: number, centerY: number, color?: boolean): void {
+    let canvasHeight: number = this.shortestSide();
+    let boatHeight: number = canvasHeight * 0.25;
     this.context!.save();
-    // disegno la parte destro
+    // disegno la parte destra
     this.context!.beginPath()
     this.context!.lineWidth = 3;
     this.context!.strokeStyle = color ? "green" : "black";
     // fisso il punto di prua
-    this.context!.moveTo(centerX, centerY - 140)
-    this.context!.quadraticCurveTo(centerX + 70, centerY - 100, centerX + 50, centerY + 40 );
-    this.context!.lineTo(centerX, centerY + 40)
+    this.context!.moveTo(centerX, centerY - boatHeight)
+    this.context!.quadraticCurveTo(centerX + 70, centerY - 75, centerX + 50, centerY + 80 );
+    this.context!.lineTo(centerX, centerY + 80)
     this.context!.stroke();
     this.context!.fillStyle = "white";
     this.context!.fill();
     // disegno la parte sinistra
     this.context!.beginPath();
     this.context!.strokeStyle = color ? "red" : "black";
-    this.context!.moveTo(centerX, centerY - 140)
-    this.context!.quadraticCurveTo( centerX - 70, centerY - 100, centerX - 50, centerY + 40 );
-    this.context!.lineTo(centerX, centerY + 40)
+    this.context!.moveTo(centerX, centerY - boatHeight)
+    this.context!.quadraticCurveTo( centerX - 70, centerY - 75, centerX - 50, centerY + 80 );
+    this.context!.lineTo(centerX, centerY + 80)
     this.context!.stroke();
     this.context!.fillStyle = "white";
     this.context!.fill();
@@ -154,25 +174,12 @@ export class CompassWidgetComponent implements OnInit {
     this.context!.restore();
   }
 
-  private drawAngleIndicator(angle: number) {
-    let centerX: number = this.canvas!.nativeElement.width / 2;
-    let centerY: number = this.canvas!.nativeElement.height / 2;
-    let radius: number = this.canvas!.nativeElement.height * 0.37;
-
-    this.context!.setTransform(1, 0, 0, 1, centerX, centerY);
-    this.context!.rotate(this.degreeToRadians(angle));
-    this.context!.translate(0, radius); // sono sulla circonferenza
-    
-    this.context!.beginPath();
-    this.context!.moveTo(0, 0); // 0, 0 è l'attuale posizione sulla circonferenza
-    this.context!.lineTo(0, -10);
-    this.context!.stroke();
-  }
 
   drawAnglesIndicators(xSign: number, text:string, customOffset?: number, direction?: string) {
     let centerX: number = this.canvas!.nativeElement.width / 2;
     let centerY: number = this.canvas!.nativeElement.height / 2;
-    let radius: number = this.canvas!.nativeElement.height * 0.4;
+    let shortestSide = this.shortestSide();
+    let radius: number = shortestSide * 0.4;
     let offSet: number = 20;
     if (direction !== null && direction === 'horizontal') {
       let designatedWidth: number = centerX + (xSign * radius) + (xSign * offSet);
@@ -183,6 +190,7 @@ export class CompassWidgetComponent implements OnInit {
     } else {
       let designatedHeight: number = centerY + (xSign * radius);
       designatedHeight += customOffset !== undefined ? (xSign * customOffset) : (xSign * offSet);
+      this.context!.font = '30px sans-serif';
       this.context!.fillStyle = 'black';
       this.context!.textAlign = 'center';
       this.context!.fillText(text, centerX, designatedHeight);
@@ -234,7 +242,6 @@ export class CompassWidgetComponent implements OnInit {
         let startAngle: number = (-i * pieAngle);
         let endAngle: number = ((-i - 1) * pieAngle);
         if (angleToRadians >= -1 * pieAngle) {
-          console.log(`exec`);
           this.context!.arc(x, y, radius, 0 - Math.PI / 2, (- Math.PI / 2) - pieAngle, true);
           this.context!.lineWidth = segmentDepth;
           this.context!.fillStyle = 'gainsboro';
@@ -257,8 +264,15 @@ export class CompassWidgetComponent implements OnInit {
 
   }
 
-  private degreeToRadians(angle: number) {
+  degreeToRadians(angle: number) {
     return angle * (Math.PI / 180);
+  }
+
+  private drawMediane() {
+    this.context!.beginPath();
+    this.context!.moveTo(this.canvas!.nativeElement.width / 2, 0);
+    this.context!.lineTo(this.canvas!.nativeElement.width / 2, this.canvas!.nativeElement.height);
+    this.context!.stroke();
   }
 
 }
