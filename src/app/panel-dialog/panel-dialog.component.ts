@@ -6,7 +6,7 @@ import { AnyCatcher } from 'rxjs/internal/AnyCatcher';
 import { ConfigService } from '../services/config.service';
 
 @Component({
-  selector: 'app-panel-dialog',
+  selector: 'panel-dialog',
   templateUrl: './panel-dialog.component.html',
   styleUrls: ['./panel-dialog.component.css']
 })
@@ -24,17 +24,9 @@ export class PanelDialogComponent implements OnInit {
     ['3x3', [3, 3]]
   ]);
 
-  constructor(
-    public dialogRef: MatDialogRef<PanelDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: string,
-    private configService: ConfigService
-    ) { }
+  constructor(private configService: ConfigService) { }
 
   ngOnInit(): void {
-  }
-
-  onNoClick(): void {
-    this.dialogRef.close();
   }
 
   /**
@@ -66,7 +58,7 @@ export class PanelDialogComponent implements OnInit {
         let newCfg = JSON.stringify(this.config);
         this.configService.saveConfig(newCfg);
       }
-      this.dialogRef.close();
+      // this.dialogRef.close();
       // permette di ricaricare la pagina e quindi di aggiornare la tab bar
       window.location.reload();
     } else {
