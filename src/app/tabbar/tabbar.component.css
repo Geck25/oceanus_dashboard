@@ -14,6 +14,11 @@
     background-color: #3F51B5;
 }
 
+.buttons {
+    display: flex;
+    justify-content: space-between;
+}
+
 .panels {
     display: none;
 }

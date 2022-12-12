@@ -17,14 +17,23 @@
 
 <ng-template #small_device>
     <div class="small-bar">
-        <button mat-raised-button (click)="toggleTabPanel()">
-            <mat-icon>menu</mat-icon>
-        </button>
+        <div class="buttons">
+            <button mat-raised-button (click)="toggleTabPanel()">
+                <mat-icon>menu</mat-icon>
+            </button>
+            <button mat-raised-button>Aggiungi Pannello</button>
+        </div>
+        
         <div #dmenu class="panels">
-            <mat-list *ngFor="let tab of tabs">
-                <mat-list-item [routerLink]="['/dashboard', tab]" (click)="toggleTabPanel()">
-                    <span class="list-item">{{ tab }}</span>
+            <mat-list>
+                <mat-list-item routerLink="/home">
+                    <span class="list-item">Home</span>
                 </mat-list-item>
+                <ng-container *ngFor="let tab of tabs">
+                    <mat-list-item [routerLink]="['/dashboard', tab]" (click)="toggleTabPanel()">
+                        <span class="list-item">{{ tab }}</span>
+                    </mat-list-item>
+                </ng-container>
             </mat-list>
         </div>
     </div>
