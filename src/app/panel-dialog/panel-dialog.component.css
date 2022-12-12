@@ -11,6 +11,11 @@
     gap: 15px;
 }
 
+.small-forms {
+    display: flex;
+    flex-direction: column;
+}
+
 .submit-button {
     margin-bottom: 4px;
 }

@@ -29,7 +29,7 @@
 
 <div class="modal-content">
     <form class="content">
-        <div class="forms">
+        <div [ngClass]="isSmallScreen ? 'small-forms' : 'forms'">
             <div class="panel-name-form">
                 <mat-form-field appearance="fill">
                     <mat-label for="panel-name">Nome Pannello</mat-label>
