@@ -22,6 +22,7 @@
 .info {
     display: flex;
     justify-content: space-around;
+    margin-top: 35px;
 }
 
 p {
@@ -29,8 +30,17 @@ p {
 }
 
 .img {
+    margin-top: 50px;
     display: flex;
     justify-content: center;
     opacity: 0.5;
+    max-width: 100%;
+    height: auto;
+    padding: 0 10px;
+}
+
+.img > img {
+    max-width: 100%;
+    height: auto;
 }
 
