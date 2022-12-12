@@ -56,7 +56,8 @@ export class CompassWidgetComponent implements OnInit {
     this.context!.clearRect(0, 0, this.canvas!.nativeElement.width, this.canvas!.nativeElement.height);
     let centerX: number = this.canvas!.nativeElement.width / 2;
     let centerY: number = this.canvas!.nativeElement.height / 2;
-    let canvasHeight: number = this.canvas!.nativeElement.height;
+    // let canvasHeight: number = this.canvas!.nativeElement.height;
+    let canvasHeight: number = this.shortestSide();
 
     this.context!.save();
     this.context!.translate(centerX, centerY);
@@ -84,9 +85,9 @@ export class CompassWidgetComponent implements OnInit {
     });
     // draw current angle indicator
     this.context!.rotate(this.degreeToRadians(currentValue));
-    this.context!.moveTo(0 - 20, 0-100);
-    this.context!.lineTo(0 + 20, 0-100);
-    this.context!.lineTo(0, 0 - 160);
+    this.context!.moveTo(0 - 20, 0 - canvasHeight * 0.2);
+    this.context!.lineTo(0 + 20, 0 - canvasHeight * 0.2);
+    this.context!.lineTo(0, 0 - canvasHeight * 0.35);
     this.context!.fillStyle = "red";
     this.context!.fill();
 
