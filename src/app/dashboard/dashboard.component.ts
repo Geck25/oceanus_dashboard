@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { map, Subscription, timer } from 'rxjs';
 import { ConfigService } from '../services/config.service';
-import { TelemetryService } from '../telemetry.service';
+import { TelemetryService } from '../services/telemetry.service';
 import { measures } from '../utils/measure';
 
 

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { map, Subscription, timer } from 'rxjs';
-import { TelemetryService } from '../telemetry.service';
+import { TelemetryService } from '../services/telemetry.service';
 
 @Component({
   selector: 'app-home',

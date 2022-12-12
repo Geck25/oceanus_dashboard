@@ -1,6 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { MatChip } from '@angular/material/chips';
-import { TelemetryService } from '../telemetry.service';
+import { TelemetryService } from '../services/telemetry.service';
 
 @Component({
   selector: 'widget-grid',
