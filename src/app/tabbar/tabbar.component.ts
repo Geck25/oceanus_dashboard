@@ -1,9 +1,9 @@
-import { Component, OnInit, Inject, ViewChild, ElementRef, HostListener } from '@angular/core';
+import { Component, OnInit, Inject, ViewChild, ElementRef, HostListener, ViewChildren, QueryList, ContentChildren } from '@angular/core';
 import { ConfigService } from '../services/config.service';
 import {MatDialog } from '@angular/material/dialog';
-import { PanelDialogComponent } from '../panel-dialog/panel-dialog.component';
 import { ToggleButtonComponent } from '../toggle.button/toggle.button.component';
 import { BreakpointObserver } from '@angular/cdk/layout';
+import { NavigationEnd, Router } from '@angular/router';
 
 
 export interface DialogData {
@@ -18,15 +18,17 @@ export interface DialogData {
 export class TabbarComponent implements OnInit {
   tabs: string[] = [];
   selectedButton: ToggleButtonComponent | null = null;
-  @ViewChild(ToggleButtonComponent) homeButton: ToggleButtonComponent | null = null;
+  @ViewChildren(ToggleButtonComponent) childrenButton: QueryList<ToggleButtonComponent>;
   @ViewChild('dmenu') dropdownMenu: ElementRef<HTMLDivElement>;
   @ViewChild('modal') modal: ElementRef<HTMLDivElement>;
   useSideNav: boolean = false;
+  currentEndpoint: string = '';
 
   constructor(
     private configService: ConfigService,
     public dialog: MatDialog,
-    private breakPoint: BreakpointObserver
+    private breakPoint: BreakpointObserver,
+    private router: Router
     ) { }
 
   ngOnInit(): void {
@@ -41,11 +43,32 @@ export class TabbarComponent implements OnInit {
     ).subscribe(result => {
       this.useSideNav = false;
       if (result.matches) { this.useSideNav = true; }
+    });
+
+    this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        let endpoint = event.url;
+        this.currentEndpoint = endpoint.substring(endpoint.lastIndexOf('/') + 1);
+        console.log(`current endpoint ${this.currentEndpoint}`)
+      }
     })
   }
 
+
+
   ngAfterViewInit() {
-    this.selectedButton = this.homeButton;
+    // setTimeout is used to avoid "Expression has changed after it was checked" error
+    setTimeout(() => {
+      if (this.currentEndpoint.length !== 0) {
+        this.childrenButton.forEach(button => {
+          let parameter = button.endPoint.substring(button.endPoint.lastIndexOf('/') + 1);
+          console.log(parameter)
+          if (parameter === this.currentEndpoint) {
+            this.toggleButton(button);
+          }
+        });
+      }
+    });
   }
 
   toggleButton(button: ToggleButtonComponent) {

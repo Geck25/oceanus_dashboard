@@ -1,9 +1,9 @@
 <div *ngIf="!useSideNav; else small_device" class="navbar">
     <div class="panels-buttons">
-        <toggle-button [isSelected]="true" [isHomeEndPoint]="true">
-            <!-- There will be rendered by default 'Home' -->
+        <toggle-button endPoint="/home">
+            <span>Home</span>
         </toggle-button>
-        <toggle-button *ngFor="let tab of tabs" [endPoint]="tab">
+        <toggle-button *ngFor="let tab of tabs" [endPoint]="'/dashboard/' + tab">
             <span>{{ tab }}</span>
         </toggle-button>
     </div>
