@@ -32,8 +32,8 @@
         <div [ngClass]="isSmallScreen ? 'small-forms' : 'forms'">
             <div class="panel-name-form">
                 <mat-form-field appearance="fill">
-                    <mat-label for="panel-name">Nome Pannello</mat-label>
-                    <input matNativeControl type="text" name="panel-name" [formControl]="panelName">
+                    <mat-label>Nome Pannello</mat-label>
+                    <input matNativeControl type="text" [formControl]="panelName">
                     <mat-error *ngIf="panelName.invalid">Il nome del pannello deve essere specificato</mat-error>
                 </mat-form-field>
             </div>
