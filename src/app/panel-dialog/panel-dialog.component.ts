@@ -1,8 +1,8 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { BreakpointObserver } from '@angular/cdk/layout';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { MatChip } from '@angular/material/chips';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { AnyCatcher } from 'rxjs/internal/AnyCatcher';
+import { Router } from '@angular/router';
 import { ConfigService } from '../services/config.service';
 
 @Component({
@@ -12,21 +12,32 @@ import { ConfigService } from '../services/config.service';
 })
 export class PanelDialogComponent implements OnInit {
   panelName = new FormControl<string>('', Validators.required);
+  selectedDimension = new FormControl('', Validators.required);
   config: any = null;
   selectedMeasures: string[] = [];
   someError: boolean = false;
   widgetsOverflowError: string = '';
-  selectedDimension: string = '';
   selectableWidgets: number = 0;
+  isSmallScreen: boolean = false;
 
   dimensions: Map<string, number[]> = new Map([
     ['2x2', [2, 2]],
     ['3x3', [3, 3]]
   ]);
 
-  constructor(private configService: ConfigService) { }
+  constructor(
+    private configService: ConfigService,
+    private router: Router,
+    private breakpointObserver: BreakpointObserver
+    ) { }
 
   ngOnInit(): void {
+    this.breakpointObserver.observe(
+      '(max-width: 600px)'
+    ).subscribe(result => {
+      this.isSmallScreen = false;
+      if (result.matches) { this.isSmallScreen = true; }
+    })
   }
 
   /**
@@ -41,7 +52,7 @@ export class PanelDialogComponent implements OnInit {
         // build a cfg object
         const cfg = {
           [this.panelName.value as string]: {
-            panelDimension: this.dimensions.get(this.selectedDimension),
+            panelDimension: this.dimensions.get(this.selectedDimension.value!),
             measures: this.selectedMeasures
           }
         };
@@ -51,16 +62,15 @@ export class PanelDialogComponent implements OnInit {
         // se c'è già una configurazione faccio il parsing e aggiungo la nuova tab
         this.config = JSON.parse(currentConfig);
         this.config[this.panelName.value!] = {
-          panelDimension: this.dimensions.get(this.selectedDimension),
+          panelDimension: this.dimensions.get(this.selectedDimension.value!),
           measures: this.selectedMeasures
         }
         // converto la nuova cfg in stringa e la salvo
         let newCfg = JSON.stringify(this.config);
         this.configService.saveConfig(newCfg);
       }
-      // this.dialogRef.close();
-      // permette di ricaricare la pagina e quindi di aggiornare la tab bar
-      window.location.reload();
+
+      this.router.navigate(['/dashboard', this.panelName.value]);
     } else {
       this.someError = true;
     }
@@ -81,7 +91,11 @@ export class PanelDialogComponent implements OnInit {
         this.selectedMeasures.push(newChip.value);
         newChip.toggleSelected();
       } else {
-        this.widgetsOverflowError = `Puoi avere massimo ${this.selectableWidgets} widgets!`
+        if (this.selectableWidgets === 0) { 
+          this.widgetsOverflowError = 'Seleziona una dimensione per il pannello'
+        } else { 
+          this.widgetsOverflowError = `Puoi avere massimo ${this.selectableWidgets} widgets!`
+        }
       }
     }
   }
@@ -91,7 +105,7 @@ export class PanelDialogComponent implements OnInit {
     // se l'utente cambia la dimensione della griglia, lo fa magari perché vuole
     // più widget, perciò resetto il messaggio di errore
     this.widgetsOverflowError = '';
-    let arrayOfDimensions: number[] = this.dimensions.get(event.value)!;
+    let arrayOfDimensions: number[] = this.dimensions.get(this.selectedDimension.value!)!;
     this.selectableWidgets = arrayOfDimensions[0] * arrayOfDimensions[1];
     console.log(this.selectableWidgets);
   }
