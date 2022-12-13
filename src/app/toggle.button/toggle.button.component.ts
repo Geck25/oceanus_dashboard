@@ -8,7 +8,6 @@ import { TabbarComponent } from '../tabbar/tabbar.component';
 })
 export class ToggleButtonComponent {
   @Input() isSelected: boolean = false;
-  @Input() isHomeEndPoint: boolean = false;
   @Input() endPoint: string = '';
 
   constructor(private container: TabbarComponent) { }
