@@ -75,12 +75,12 @@ export class CompassWidgetComponent implements OnInit {
       this.context!.closePath();
       this.context!.stroke();
       this.context!.translate(-5, -20);
-      this.context!.font = "16px sans-serif";
+      this.context!.font = "24px sans-serif";
       if (angle === 0) {angle = 'N'; this.context!.fillStyle = "red"; }
       if (angle === 90) angle = 'E';
       if (angle === 180) angle = 'S';
       if (angle === 270) angle = 'O';
-      this.context!.fillText(angle.toString(), 0, 0);
+      this.context!.fillText(angle.toString(), -5, 0);
       this.context!.restore();
     });
     // draw current angle indicator
