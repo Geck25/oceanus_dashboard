@@ -1,14 +1,14 @@
 import { Component, OnInit, Inject, ViewChild, ElementRef, HostListener, ViewChildren, QueryList, ContentChildren } from '@angular/core';
 import { ConfigService } from '../services/config.service';
-import {MatDialog } from '@angular/material/dialog';
+// import {MatDialog } from '@angular/material/dialog';
 import { ToggleButtonComponent } from '../toggle.button/toggle.button.component';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { NavigationEnd, Router } from '@angular/router';
 
 
-export interface DialogData {
-  selectedMeasurement: string,
-}
+// export interface DialogData {
+//   selectedMeasurement: string,
+// }
 
 @Component({
   selector: 'app-tabbar',
@@ -26,7 +26,7 @@ export class TabbarComponent implements OnInit {
 
   constructor(
     private configService: ConfigService,
-    public dialog: MatDialog,
+    //public dialog: MatDialog,
     private breakPoint: BreakpointObserver,
     private router: Router
     ) { }
