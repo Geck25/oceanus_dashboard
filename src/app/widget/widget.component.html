@@ -1,4 +1,4 @@
-<div class="widgets">
+<div *ngIf="!tabletScreen; else tablet_screen" class="widgets">
     <div class="name">
         <span id="full-name">{{ measureFullName }}</span>
         <span id="short-name">({{ measureName }})</span>
@@ -8,4 +8,16 @@
         <span id="unit"> [{{ unitOfMeasurement }}] </span>
     </div>
 </div>
+
+<ng-template #tablet_screen>
+    <div class="widgets">
+        <div class="name">
+            <span id="short-name-tablet">{{ measureName }}</span>
+        </div>
+        <div class="value">
+            <span id="measure-value"> {{ measureValue }} </span>
+            <span id="unit"> [{{ unitOfMeasurement }}] </span>
+        </div>
+    </div>
+</ng-template>
 
