@@ -1,4 +1,4 @@
-import { BreakpointObserver } from '@angular/cdk/layout';
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Component, OnInit, Input, SimpleChanges, OnChanges } from '@angular/core';
 import { measures } from '../utils/measure';
 
@@ -28,8 +28,7 @@ export class WidgetComponent implements OnInit, OnChanges {
     this.compassType = measures[this.measureName].compassType !== undefined ? measures[this.measureName].compassType! : '';   
 
     this.breakPoint.observe([
-      '(min-width: 601px)',
-      '(max-width: 1024px)'
+      Breakpoints.Tablet
     ]).subscribe(result => {
       this.tabletScreen = false;
       if (result.matches) { this.tabletScreen = true; }
