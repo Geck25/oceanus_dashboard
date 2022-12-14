@@ -1,7 +1,8 @@
 <div *ngIf="!isSmallDimension; else small_dimension" class="container" [style.--col]="col" [style.--row]="row">
 
     <ng-container *ngFor="let measure of response | keyvalue">
-        <div *ngIf="isCompass(measure.key); else not_compass" class="grid-cell">
+        <!-- the "&& col === 2" is used to render the compass widget ONLY if the grid is a 2x2 -->
+        <div *ngIf="isCompass(measure.key) && col === 2; else not_compass" class="grid-cell">
             <compass class="compass-canvas" [selectedMeasure]="measure.key" [value]="measure.value"></compass>
         </div>
 
