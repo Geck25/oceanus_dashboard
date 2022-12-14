@@ -6,6 +6,9 @@
         <toggle-button *ngFor="let tab of tabs" [endPoint]="'/dashboard/' + tab">
             <span>{{ tab }}</span>
         </toggle-button>
+        <toggle-button endPoint="/regata-field">
+            <span>Regata Field</span>
+        </toggle-button>
     </div>
     <button mat-raised-button (click)="openDialog()">Aggiungi pannello</button>
 </div>
