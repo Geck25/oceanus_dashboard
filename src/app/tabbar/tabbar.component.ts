@@ -49,7 +49,6 @@ export class TabbarComponent implements OnInit {
       if (event instanceof NavigationEnd) {
         let endpoint = event.url;
         this.currentEndpoint = endpoint.substring(endpoint.lastIndexOf('/') + 1);
-        console.log(`current endpoint ${this.currentEndpoint}`)
       }
     })
   }
@@ -62,7 +61,6 @@ export class TabbarComponent implements OnInit {
       if (this.currentEndpoint.length !== 0) {
         this.childrenButton.forEach(button => {
           let parameter = button.endPoint.substring(button.endPoint.lastIndexOf('/') + 1);
-          console.log(parameter)
           if (parameter === this.currentEndpoint) {
             this.toggleButton(button);
           }
