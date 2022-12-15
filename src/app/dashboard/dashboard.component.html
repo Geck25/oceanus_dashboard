@@ -12,12 +12,24 @@
             </div>
         </ng-template>
     </ng-container>
+
+    <div class="delete-button">
+        <button mat-mini-fab color="primary" (click)="deletePanel()">
+            <mat-icon>delete</mat-icon>
+        </button>
+    </div>
     
 </div>
 
 <ng-template #small_dimension>
     <div class="sm-container">
-        <span id="panel-name">{{ panelName }}</span>
+        <div class="header">
+            <span id="panel-name">{{ panelName }}</span>
+
+            <button id="sm-delete-button" mat-mini-fab color="primary" (click)="deletePanel()">
+                <mat-icon>delete</mat-icon>
+            </button>
+        </div>
         <ng-container *ngFor="let measure of response | keyvalue">
             <div class="grid-cell" >
                 <widget [measureName]="measure.key" [measureValue]="measure.value"></widget>

@@ -1,6 +1,6 @@
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { map, Subscription, timer } from 'rxjs';
 import { ConfigService } from '../services/config.service';
 import { TelemetryService } from '../services/telemetry.service';
@@ -31,7 +31,8 @@ export class DashboardComponent implements OnInit {
     private telemetry: TelemetryService, 
     private configService: ConfigService, 
     private activatedRoute: ActivatedRoute,
-    private breakPoint: BreakpointObserver
+    private breakPoint: BreakpointObserver,
+    private router: Router
     ) { }
 
   ngOnInit(): void {
@@ -66,6 +67,12 @@ export class DashboardComponent implements OnInit {
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
+  }
+
+  deletePanel(): void {
+    delete this.config[this.panelName];
+    this.configService.saveConfig(JSON.stringify(this.config));
+    this.router.navigate(['/home']).then(() => window.location.reload())
   }
 
   isCompass(measure: any): boolean {

@@ -7,6 +7,13 @@
     height: 100%;
 }
 
+.delete-button{
+    position: absolute;
+    right: 1%;
+    /* margin-top: 10px; */
+    font-size: 16px;
+}
+
 .sm-container {
     padding: 15px;
     display: flex;
@@ -15,8 +22,22 @@
     gap: 10px;
 }
 
+.header {
+    position: relative;
+    display: flex;
+    align-items: baseline;
+    margin-bottom: 20px;
+}
+
+#sm-delete-button {
+    position: absolute;
+    right: 1%;
+    top: -35%;
+}
+
 #panel-name {
     font-size: 20px;
     font-weight: bold;
     margin: 0 20px;
+    flex-grow: 2;
 }
