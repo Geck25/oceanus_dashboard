@@ -27,3 +27,11 @@ export function bearingBetweenTwoPoints(lat1: number, lon1: number, lat2: number
 
     return bearing;
 }
+
+export function gradiDecimaliToGradiMinuti(coordinate: number): string {
+    let parteIntera = Math.trunc(coordinate);
+    let parteDecimale = coordinate % 1;
+    parteDecimale *= 60;
+    let convertedCoordinate = parteIntera.toString() + ' ' + parteDecimale.toFixed(3);
+    return convertedCoordinate;
+}
