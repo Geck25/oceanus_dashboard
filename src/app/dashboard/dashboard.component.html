@@ -14,11 +14,23 @@
     </ng-container>
 
     <div class="delete-button">
-        <button mat-mini-fab color="primary" (click)="deletePanel()">
+        <button mat-mini-fab color="primary" (click)="openConfirmDialog()">
             <mat-icon>delete</mat-icon>
         </button>
     </div>
     
+</div>
+
+<div #confirmModal class="modal">
+    <div class="content">
+        <p>Sei sicuro di voler cancellare il pannello?</p>
+        <div class="buttons">
+            <button mat-raised-button (click)="deletePanel()">
+                <span id="warn">Si</span> 
+            </button>
+            <button mat-raised-button (click)="closeConfirmDialog()">No</button>
+        </div>
+    </div>
 </div>
 
 <ng-template #small_dimension>
