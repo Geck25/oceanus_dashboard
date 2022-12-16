@@ -21,6 +21,25 @@
     
 </div>
 
+
+<ng-template #small_dimension>
+    <div class="sm-container">
+        <div class="header">
+            <span id="panel-name">{{ panelName }}</span>
+            
+            <button id="sm-delete-button" mat-mini-fab color="primary" (click)="openConfirmDialog()">
+                <mat-icon>delete</mat-icon>
+            </button>
+        </div>
+        <ng-container *ngFor="let measure of response | keyvalue">
+            <div class="grid-cell" >
+                <widget [measureName]="measure.key" [measureValue]="measure.value"></widget>
+            </div>
+        </ng-container>
+    </div>
+</ng-template>
+
+<!-- Confirmation modal -->
 <div #confirmModal class="modal">
     <div class="content">
         <p>Sei sicuro di voler cancellare il pannello?</p>
@@ -32,20 +51,3 @@
         </div>
     </div>
 </div>
-
-<ng-template #small_dimension>
-    <div class="sm-container">
-        <div class="header">
-            <span id="panel-name">{{ panelName }}</span>
-
-            <button id="sm-delete-button" mat-mini-fab color="primary" (click)="deletePanel()">
-                <mat-icon>delete</mat-icon>
-            </button>
-        </div>
-        <ng-container *ngFor="let measure of response | keyvalue">
-            <div class="grid-cell" >
-                <widget [measureName]="measure.key" [measureValue]="measure.value"></widget>
-            </div>
-        </ng-container>
-    </div>
-</ng-template>
