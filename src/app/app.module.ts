@@ -16,6 +16,7 @@ import { RouteReuseStrategy } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { ToggleButtonComponent } from './toggle.button/toggle.button.component';
 import { CompassWidgetComponent } from './compass-widget/compass-widget.component';
+import { RegataFieldComponent } from './regata-field/regata-field.component';
 
 /** Angular Material Imports */
 import { MatTabsModule } from '@angular/material/tabs';
@@ -30,7 +31,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { LayoutModule } from '@angular/cdk/layout';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
-import { RegataFieldComponent } from './regata-field/regata-field.component';
+import { MatTableModule } from '@angular/material/table';
 
 @NgModule({
   declarations: [
@@ -63,6 +64,7 @@ import { RegataFieldComponent } from './regata-field/regata-field.component';
     LayoutModule,
     MatIconModule,
     MatListModule,
+    MatTableModule,
   ],
   exports: [
     MatFormFieldModule,
