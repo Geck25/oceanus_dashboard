@@ -1,1 +1,54 @@
-<p>regata-field works!</p>
+<table mat-table [dataSource]="devices">
+    <ng-container matColumnDef="label">
+        <th mat-header-cell *matHeaderCellDef> </th>
+        <td mat-cell *matCellDef="let device"> {{ device.label }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="latitude">
+        <th mat-header-cell *matHeaderCellDef>Latitude</th>
+        <td mat-cell *matCellDef="let device"> {{ parseToGradiMinuti(device.latitude) }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="longitude">
+        <th mat-header-cell *matHeaderCellDef>Longitude</th>
+        <td mat-cell *matCellDef="let device"> {{ device.longitude }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="distance">
+        <th mat-header-cell *matHeaderCellDef>Distance</th>
+        <td mat-cell *matCellDef="let device"> {{ device.distance }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="course">
+        <th mat-header-cell *matHeaderCellDef>Rilevamento</th>
+        <td mat-cell *matCellDef="let device"> {{ device.course }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="time">
+        <th mat-header-cell *matHeaderCellDef>Time</th>
+        <td mat-cell *matCellDef="let device"> {{ device.time }}</td>
+    </ng-container>
+    <ng-container matColumnDef="sog">
+        <th mat-header-cell *matHeaderCellDef>SOG</th>
+        <td mat-cell *matCellDef="let device"> {{ device.sog }}</td>
+    </ng-container>
+    <ng-container matColumnDef="cog">
+        <th mat-header-cell *matHeaderCellDef>COG</th>
+        <td mat-cell *matCellDef="let device"> {{ device.cog }}</td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="dColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: dColumns"></tr>
+</table>
+
+<table class="sm-table">
+    <tr class="sm-row">
+        <td class="sm-data">Angle Start Line - PIN Line</td>
+        <td class="sm-data">{{ asl_pl }}</td>
+    </tr>
+
+    <tr class="sm-row">
+        <td class="sm-data">Angle PIN OFFSET - PIN Line</td>
+        <td class="sm-data">prova 2</td>
+    </tr>
+</table>
