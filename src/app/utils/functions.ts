@@ -35,3 +35,21 @@ export function gradiDecimaliToGradiMinuti(coordinate: number): string {
     let convertedCoordinate = parteIntera.toString() + ' ' + parteDecimale.toFixed(3);
     return convertedCoordinate;
 }
+
+/**
+ * nel file tyson courseVesselPin = a1 mentre courseVesselTopMark = a2
+ * @param courseVesselPin 
+ * @param courseVesselTopMark 
+ * @returns 
+ */
+export function angleStartLinePinLin(courseVesselPin: string, courseVesselTopMark: string): number {
+    let cvtmParsed = parseFloat(courseVesselTopMark);
+    let cvpParsed = parseFloat(courseVesselPin);
+    
+    let da = Math.abs(cvtmParsed - cvpParsed);
+    if (da > 180.0) {
+        da = 360.0 - da;
+    }
+
+    return da;
+}
