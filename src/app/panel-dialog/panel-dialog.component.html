@@ -1,32 +1,3 @@
-<!-- <mat-dialog-content class="content">
-    <div class="forms">
-        <div class="form-name">
-            <mat-form-field appearance="outline">
-                <mat-label>Nome pannello</mat-label>
-                <input matInput type="text" [formControl]="panelName">
-                <mat-error *ngIf="panelName.invalid">Il nome del pannello deve essere specificato</mat-error>
-            </mat-form-field>
-        </div>
-        <div class="grid-dimension-selector">
-            <mat-form-field appearance="outline">
-                <mat-label>Dimensione pannello</mat-label>
-                <mat-select [(value)]="selectedDimension" (selectionChange)="updateSelectableWidgets($event)">
-                    <mat-option value="2x2">2x2</mat-option>
-                    <mat-option value="3x3">3x3</mat-option>
-                </mat-select>
-            </mat-form-field>
-        </div>
-    </div>
-    <div class="widget-grid">
-        <widget-grid (submitSelectedMeasuresEvent)="addMeasure($event)"></widget-grid>
-    </div>
-    <mat-error *ngIf="widgetsOverflowError.length !=0">{{ widgetsOverflowError }}</mat-error>
-    <mat-error *ngIf="someError">Errore! controlla se è presente un nome per il pannello e se hai selezionato {{selectableWidgets}} widget</mat-error>
-    <div class="submit-button">
-        <button mat-raised-button (click)="addPanel()">Aggiungi</button>
-    </div>
-</mat-dialog-content> -->
-
 <div class="modal-content">
     <form class="content">
         <div [ngClass]="isSmallScreen ? 'small-forms' : 'forms'">
