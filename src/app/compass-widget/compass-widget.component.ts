@@ -1,5 +1,5 @@
-import { Component, Input, NgZone, OnInit, ViewChild } from '@angular/core';
-import { fromEvent, Observable, Subscription, take } from 'rxjs';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { fromEvent, Observable, Subscription } from 'rxjs';
 import { measures } from '../utils/measure';
 
 @Component({
@@ -22,7 +22,7 @@ export class CompassWidgetComponent implements OnInit {
   currentValue: number = 0;
   angles: (number | string)[] = [0, 45, 90, 135, 180, 225, 270, 315];
 
-  constructor(private ngZone: NgZone) {}
+  constructor() {}
   
   ngOnInit(): void {
     this.type = measures[this.selectedMeasure].compassType!;
