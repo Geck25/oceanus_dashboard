@@ -92,7 +92,6 @@ export class DashboardComponent implements OnInit {
 
   @HostListener('window:click', ['$event.target'])
   onOutsideModalClick(target: HTMLElement) {
-    console.log(target.classList.contains('widgets'));
     if (target === this.confirmModal.nativeElement) {
       target.style.display = 'none';
     }

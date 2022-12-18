@@ -39,10 +39,16 @@
     <div class="sm-container">
         <div class="header">
             <span id="panel-name">{{ panelName }}</span>
-            
-            <button id="sm-delete-button" mat-mini-fab color="primary" (click)="openConfirmDialog()">
-                <mat-icon>delete</mat-icon>
+        </div>
+
+        <div [ngClass]="isSmallDimension ? 'dd-sm' : ''">
+            <button mat-icon-button (click)="showOptions()">
+                <mat-icon>more_vert</mat-icon>
             </button>
+            <div #panelOptions class="dropdown-options">
+                <!-- <a (click)="openEditForm()">Edit</a>  -->
+                <a (click)="openConfirmDialog()">Delete</a>
+            </div>
         </div>
         <ng-container *ngFor="let measure of response | keyvalue">
             <div class="grid-cell" >
