@@ -26,6 +26,7 @@ export class DashboardComponent implements OnInit {
   isSmallDimension: boolean = false;
   panelName: string = '';
   @ViewChild('confirmModal') confirmModal: ElementRef<HTMLElement>;
+  @ViewChild('panelOptions') panelOptions: ElementRef<HTMLElement>;
 
 
   constructor(
@@ -85,10 +86,19 @@ export class DashboardComponent implements OnInit {
     this.confirmModal.nativeElement.style.display = 'none';
   }
 
+  showOptions(): void {
+    this.panelOptions.nativeElement.style.display = 'block';
+  }
+
   @HostListener('window:click', ['$event.target'])
   onOutsideModalClick(target: HTMLElement) {
+    console.log(target.classList.contains('widgets'));
     if (target === this.confirmModal.nativeElement) {
-      this.confirmModal.nativeElement.style.display = 'none';
+      target.style.display = 'none';
+    }
+    
+    if (this.panelOptions.nativeElement.style.display === 'block' && target.classList.contains('widgets')) {
+      this.panelOptions.nativeElement.style.display = 'none';
     }
   }
 
