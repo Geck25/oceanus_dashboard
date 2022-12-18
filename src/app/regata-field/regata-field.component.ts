@@ -1,3 +1,4 @@
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Component, OnInit } from '@angular/core';
 import { Subscription, timer, map } from 'rxjs';
 import { TelemetryService } from '../services/telemetry.service';
@@ -28,6 +29,7 @@ export class RegataFieldComponent implements OnInit {
   apiSubscription: Subscription;
   devices : DeviceInformation[] = [];
   dColumns: string[] = ['label', 'latitude', 'longitude', 'distance', 'course', 'time', 'sog', 'cog'];
+  isSmallScreen: boolean = false;
   // Angle Start Line - PIN Line
   asl_pl: number;
   // Angle PIN OFFSET - PIN Line
@@ -43,9 +45,19 @@ export class RegataFieldComponent implements OnInit {
   // array ausiliario per "convertire" le label tx1 -> vessel, rx2 -> top mark, rx3 -> pin
   labels: string[] = ['Vessel', 'Top Mark', 'PIN'];
 
-  constructor(private telemetryService: TelemetryService) { }
+  constructor(
+    private telemetryService: TelemetryService,
+    private breakPoint: BreakpointObserver) { }
 
   ngOnInit(): void {
+    this.breakPoint.observe([
+      Breakpoints.XSmall
+    ]).subscribe(result => {
+      this.isSmallScreen = false;
+      if (result.matches) { this.isSmallScreen = true; }
+    })
+
+
     this.apiSubscription = timer(0, 2000).pipe(
       map(() => {
         this.telemetryService.getTelemetry().subscribe(data => {
