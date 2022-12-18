@@ -1,46 +1,72 @@
-<table mat-table [dataSource]="devices">
-    <ng-container matColumnDef="label">
-        <th mat-header-cell *matHeaderCellDef> </th>
-        <td mat-cell *matCellDef="let device"> {{ device.label }}</td>
-    </ng-container>
+<ng-container *ngIf="!isSmallScreen; else small_table">
 
-    <ng-container matColumnDef="latitude">
-        <th mat-header-cell *matHeaderCellDef>Latitude</th>
-        <td mat-cell *matCellDef="let device"> {{ parseToGradiMinuti(device.latitude) }}</td>
-    </ng-container>
+    <table mat-table [dataSource]="devices">
+        <ng-container matColumnDef="label">
+            <th mat-header-cell *matHeaderCellDef> </th>
+            <td mat-cell *matCellDef="let device"> {{ device.label }}</td>
+        </ng-container>
+        
+        <ng-container matColumnDef="latitude">
+            <th mat-header-cell *matHeaderCellDef>Latitude</th>
+            <td mat-cell *matCellDef="let device"> {{ parseToGradiMinuti(device.latitude) }}</td>
+        </ng-container>
+        
+        <ng-container matColumnDef="longitude">
+            <th mat-header-cell *matHeaderCellDef>Longitude</th>
+            <td mat-cell *matCellDef="let device"> {{ parseToGradiMinuti(device.longitude) }}</td>
+        </ng-container>
+        
+        <ng-container matColumnDef="distance">
+            <th mat-header-cell *matHeaderCellDef>Distance</th>
+            <td mat-cell *matCellDef="let device"> {{ device.distance }}</td>
+        </ng-container>
+        
+        <ng-container matColumnDef="course">
+            <th mat-header-cell *matHeaderCellDef>Rilevamento</th>
+            <td mat-cell *matCellDef="let device"> {{ device.course }}</td>
+        </ng-container>
+        
+        <ng-container matColumnDef="time">
+            <th mat-header-cell *matHeaderCellDef>Time</th>
+            <td mat-cell *matCellDef="let device"> {{ device.time }}</td>
+        </ng-container>
+        <ng-container matColumnDef="sog">
+            <th mat-header-cell *matHeaderCellDef>SOG</th>
+            <td mat-cell *matCellDef="let device"> {{ device.sog }}</td>
+        </ng-container>
+        <ng-container matColumnDef="cog">
+            <th mat-header-cell *matHeaderCellDef>COG</th>
+            <td mat-cell *matCellDef="let device"> {{ device.cog }}</td>
+        </ng-container>
+        
+        <tr mat-header-row *matHeaderRowDef="dColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: dColumns"></tr>
+    </table>
+</ng-container>
 
-    <ng-container matColumnDef="longitude">
-        <th mat-header-cell *matHeaderCellDef>Longitude</th>
-        <td mat-cell *matCellDef="let device"> {{ device.longitude }}</td>
-    </ng-container>
-
-    <ng-container matColumnDef="distance">
-        <th mat-header-cell *matHeaderCellDef>Distance</th>
-        <td mat-cell *matCellDef="let device"> {{ device.distance }}</td>
-    </ng-container>
-
-    <ng-container matColumnDef="course">
-        <th mat-header-cell *matHeaderCellDef>Rilevamento</th>
-        <td mat-cell *matCellDef="let device"> {{ device.course }}</td>
-    </ng-container>
-
-    <ng-container matColumnDef="time">
-        <th mat-header-cell *matHeaderCellDef>Time</th>
-        <td mat-cell *matCellDef="let device"> {{ device.time }}</td>
-    </ng-container>
-    <ng-container matColumnDef="sog">
-        <th mat-header-cell *matHeaderCellDef>SOG</th>
-        <td mat-cell *matCellDef="let device"> {{ device.sog }}</td>
-    </ng-container>
-    <ng-container matColumnDef="cog">
-        <th mat-header-cell *matHeaderCellDef>COG</th>
-        <td mat-cell *matCellDef="let device"> {{ device.cog }}</td>
-    </ng-container>
-
-    <tr mat-header-row *matHeaderRowDef="dColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: dColumns"></tr>
-</table>
-
+<ng-template #small_table>
+    <table id="table-sm">
+        <tr class="header">
+            <th></th>
+            <th>Lat/Lon</th>
+            <th>Dist.</th>
+            <th>Course</th>
+            <th>SOG</th>
+            <th>COG</th>
+        </tr>
+        <ng-container *ngFor="let device of devices">
+            <tr>
+                <td class="sm-td sm-label">{{ device.label }}</td>
+                <td class="sm-td">{{ parseToGradiMinuti(device.latitude) }} <br /> {{ parseToGradiMinuti(device.longitude) }}</td>
+                <td class="sm-td">{{ device.distance }}</td>
+                <td class="sm-td">{{ device.course }}</td>
+                <td class="sm-td">{{ device.sog }}</td>
+                <td class="sm-td">{{ device.cog }}</td>
+            </tr>
+        </ng-container>
+    </table>
+</ng-template>
+    
 <table class="sm-table">
     <tr class="sm-row">
         <td class="sm-data">Angle Start Line - PIN Line</td>
@@ -52,3 +78,4 @@
         <td class="sm-data">prova 2</td>
     </tr>
 </table>
+
