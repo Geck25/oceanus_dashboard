@@ -1,5 +1,5 @@
 import { BreakpointObserver } from '@angular/cdk/layout';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { MatChip } from '@angular/material/chips';
 import { Router } from '@angular/router';
@@ -70,7 +70,7 @@ export class PanelDialogComponent implements OnInit {
         this.configService.saveConfig(newCfg);
       }
 
-      this.router.navigate(['/dashboard', this.panelName.value]);
+      this.router.navigate(['/dashboard', this.panelName.value]).then(() => window.location.reload());
     } else {
       this.someError = true;
     }
@@ -101,13 +101,12 @@ export class PanelDialogComponent implements OnInit {
   }
 
 
-  updateSelectableWidgets(event: any): void {
+  updateSelectableWidgets(event?: any): void {
     // se l'utente cambia la dimensione della griglia, lo fa magari perché vuole
     // più widget, perciò resetto il messaggio di errore
     this.widgetsOverflowError = '';
     let arrayOfDimensions: number[] = this.dimensions.get(this.selectedDimension.value!)!;
     this.selectableWidgets = arrayOfDimensions[0] * arrayOfDimensions[1];
-    console.log(this.selectableWidgets);
   }
 
 }
