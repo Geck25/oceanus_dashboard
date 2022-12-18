@@ -1,14 +1,9 @@
-import { Component, OnInit, Inject, ViewChild, ElementRef, HostListener, ViewChildren, QueryList, ContentChildren } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, HostListener, ViewChildren, QueryList } from '@angular/core';
 import { ConfigService } from '../services/config.service';
-// import {MatDialog } from '@angular/material/dialog';
 import { ToggleButtonComponent } from '../toggle.button/toggle.button.component';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { NavigationEnd, Router } from '@angular/router';
 
-
-// export interface DialogData {
-//   selectedMeasurement: string,
-// }
 
 @Component({
   selector: 'app-tabbar',
@@ -26,7 +21,6 @@ export class TabbarComponent implements OnInit {
 
   constructor(
     private configService: ConfigService,
-    //public dialog: MatDialog,
     private breakPoint: BreakpointObserver,
     private router: Router
     ) { }
@@ -92,18 +86,17 @@ export class TabbarComponent implements OnInit {
     this.modal.nativeElement.style.display = 'flex';
   }
 
+  /**
+   * permette di chiudere il form per aggiungere il pannello quando
+   * l'utente clicca fuori dal form
+   * @param target l'elemento cliccato
+   */
   @HostListener('window:click', ['$event.target'])
   onOutsideModalClick(target: HTMLElement) {
     if (target === this.modal.nativeElement) {
       this.modal.nativeElement.style.display = 'none';
     }
   }
-
-  // openDialog(): void {
-  //   const dialogRef = this.dialog.open(PanelDialogComponent, {
-  //     width: '500px'
-  //   });
-  // }
 
 }
 
