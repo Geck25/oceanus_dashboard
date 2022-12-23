@@ -12,6 +12,7 @@
     text-align: center;
     font-weight: bold;
     font-size: 40px;
+    text-transform: capitalize;
 }
 
 .over-canvas {
