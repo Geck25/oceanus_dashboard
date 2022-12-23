@@ -75,7 +75,7 @@ export class DashboardComponent implements OnInit {
     delete this.config[this.panelName];
     this.configService.saveConfig(JSON.stringify(this.config));
     this.closeConfirmDialog();
-    this.router.navigate(['/home']).then(() => window.location.reload())
+    this.router.navigate(['/home']).then(() => window.location.reload());
   }
 
   openConfirmDialog(): void {
