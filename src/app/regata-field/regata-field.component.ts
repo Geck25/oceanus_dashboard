@@ -37,13 +37,14 @@ export class RegataFieldComponent implements OnInit {
 
   emptyRows: DeviceInformation[] = [
     {label: 'Offset Mark', latitude: '', longitude: '', distance: '',course: '', time: '', sog: '', cog: ''},
-    {label: 'Leeward Mark', latitude: '', longitude: '', distance: '',course: '', time: '', sog: '', cog: ''},
+    {label: 'GATE 2P', latitude: '', longitude: '', distance: '',course: '', time: '', sog: '', cog: ''},
+    {label: 'GATE 2S', latitude: '', longitude: '', distance: '',course: '', time: '', sog: '', cog: ''},
     {label: 'Finish Mark', latitude: '', longitude: '', distance: '',course: '', time: '', sog: '', cog: ''},
     {label: 'Changing Mark', latitude: '', longitude: '', distance: '',course: '', time: '', sog: '', cog: ''},
   ];
 
   // array ausiliario per "convertire" le label tx1 -> vessel, rx2 -> top mark, rx3 -> pin
-  labels: string[] = ['Vessel', 'Top Mark', 'PIN'];
+  labels: string[] = ['RC', 'Top Mark', 'PIN'];
 
   constructor(
     private telemetryService: TelemetryService,
@@ -54,7 +55,9 @@ export class RegataFieldComponent implements OnInit {
       Breakpoints.XSmall
     ]).subscribe(result => {
       this.isSmallScreen = false;
-      if (result.matches) { this.isSmallScreen = true; }
+      if (result.matches) { 
+        this.isSmallScreen = true; 
+      }
     })
 
 
