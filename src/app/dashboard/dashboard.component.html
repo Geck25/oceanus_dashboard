@@ -13,21 +13,12 @@
         </ng-template>
     </ng-container>
 
-    <!-- <div class="delete-button">
-        <button mat-mini-fab color="primary" (click)="openConfirmDialog()">
-            <mat-icon>delete</mat-icon>
-        </button>
-    </div>
-    <div class="edit-button">
-        <button mat-raised-button (click)="openEditForm()">edit</button>
-    </div> -->
 
     <div class="dropdown">
         <button mat-icon-button (click)="showOptions()">
             <mat-icon>more_vert</mat-icon>
         </button>
         <div #panelOptions class="dropdown-options">
-            <!-- <a (click)="openEditForm()">Edit</a>  -->
             <a (click)="openConfirmDialog()">Delete</a>
         </div>
     </div>
@@ -46,7 +37,6 @@
                 <mat-icon>more_vert</mat-icon>
             </button>
             <div #panelOptions class="dropdown-options">
-                <!-- <a (click)="openEditForm()">Edit</a>  -->
                 <a (click)="openConfirmDialog()">Delete</a>
             </div>
         </div>
