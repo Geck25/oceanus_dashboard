@@ -1,11 +1,10 @@
 <div *ngIf="!tabletScreen; else tablet_screen" class="widgets">
     <div class="name">
         <span id="full-name">{{ measureFullName }}</span>
-        <span id="short-name">({{ measureName }})</span>
+        <span id="short-name">{{ measureName }} - {{ unitOfMeasurement }}</span>
     </div>
     <div class="value">
         <span id="measure-value"> {{ measureValue }} </span>
-        <span id="unit"> [{{ unitOfMeasurement }}] </span>
     </div>
 </div>
 
