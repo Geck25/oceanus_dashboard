@@ -3,7 +3,7 @@
     <table mat-table [dataSource]="devices">
         <ng-container matColumnDef="label">
             <th mat-header-cell *matHeaderCellDef> </th>
-            <td mat-cell *matCellDef="let device"> {{ device.label }}</td>
+            <td class="device-label" mat-cell *matCellDef="let device"> {{ device.label.toUpperCase() }}</td>
         </ng-container>
         
         <ng-container matColumnDef="latitude">
@@ -22,7 +22,7 @@
         </ng-container>
         
         <ng-container matColumnDef="course">
-            <th mat-header-cell *matHeaderCellDef>Rilevamento</th>
+            <th mat-header-cell *matHeaderCellDef>Bearing</th>
             <td mat-cell *matCellDef="let device"> {{ device.course }}</td>
         </ng-container>
         
@@ -66,13 +66,13 @@
         </ng-container>
     </table>
 </ng-template>
-    
+
 <table class="sm-table">
     <tr class="sm-row">
         <td class="sm-data">Angle Start Line - PIN Line</td>
         <td class="sm-data">{{ asl_pl }}</td>
     </tr>
-
+    
     <tr class="sm-row">
         <td class="sm-data">Angle PIN OFFSET - PIN Line</td>
         <td class="sm-data">prova 2</td>
