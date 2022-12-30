@@ -74,6 +74,10 @@ export class TabbarComponent implements OnInit {
     }
   }
 
+  /**
+   * Metodo usato nell'interfaccia per smartphone.
+   * Implementa la logica di apertura/chiusura del menu a tendina
+   */
   toggleTabPanel(): void {
     if (this.dropdownMenu.nativeElement.style.display === 'none') {
       this.dropdownMenu.nativeElement.style.display = 'block';
@@ -82,6 +86,9 @@ export class TabbarComponent implements OnInit {
     }
   }
 
+  /**
+   * Metodo per "aprire" il form per l'aggiunta di un pannello
+   */
   openDialog(): void {
     this.modal.nativeElement.style.display = 'flex';
   }
