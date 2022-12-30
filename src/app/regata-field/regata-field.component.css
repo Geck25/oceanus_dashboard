@@ -2,9 +2,77 @@ table {
     width: 100%;
     margin: 0 auto;
     margin-top: 30px;
-    max-width: 1024px;
-}    
+}
 
+.mat-header-cell {
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 24px;
+    color: black;
+}
+
+.mat-cell, .sm-td {
+    font-size: 20px;
+}
+
+/* è importante che questo selettore stia sotto a .mat-cell
+in quanto così facendo vado a sovrascrivere il font-size
+*/
+.device-label {
+    font-weight: bold;
+    font-size: 24px;
+}
+
+.mat-column-distance, .mat-column-course {
+    text-align: center;
+}
+
+.sm-table {
+    border-collapse: collapse;
+    width: 100%;
+    max-width: 500px;
+    margin-top: 60px;
+    margin-left: 0;
+}
+
+.sm-table > tr:first-child {
+    border-top: 1px solid gainsboro;
+}
+
+.sm-row {
+    border-bottom: 1px solid gainsboro;
+}
+
+.sm-row > td:first-child {
+    font-weight: bold;
+    font-size: 24px;
+}
+
+.sm-row > td:nth-child(2) {
+    font-size: 20px;
+}
+
+.sm-data {
+    padding: 5px;
+    /* font-weight: bold; */
+}
+
+@media screen and (min-width: 601px) and (max-width: 1024px) {
+    .mat-header-cell {
+        font-size: 16px;
+        font-weight: bold;
+    }
+
+    .mat-cell {
+        font-size: 15px;
+    }
+
+    .device-label {
+        font-size: 16px;
+    }
+
+    
+}
 
 /* Smartphone screen */
 @media screen and (max-width: 600px) {
@@ -31,35 +99,5 @@ table {
         white-space: pre-wrap;
     }
 }
-
-
-
-td {
-    font-size: 16px;
-}
-
-.mat-column-distance, .mat-column-course {
-    text-align: center;
-}
-
-.sm-table {
-    border-collapse: collapse;
-    width: 100%;
-    max-width: 500px;
-    margin-top: 40px;
-}
-
-.sm-row {
-    border-bottom: 1px solid gainsboro;
-}
-
-.sm-row > td:first-child {
-    font-weight: bold;
-}
-
-.sm-data {
-    padding: 5px;
-}
-
 
   
