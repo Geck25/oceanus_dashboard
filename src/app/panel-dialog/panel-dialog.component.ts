@@ -46,7 +46,7 @@ export class PanelDialogComponent implements OnInit {
    * salvata nel local storage altrimenti la crea.
    */
   addPanel(): void {
-    if (this.panelName.valid && this.selectedMeasures.length === this.selectableWidgets) {
+    if (this.panelName.valid && this.panelName.touched && this.selectedMeasures.length === this.selectableWidgets) {
       let currentConfig = this.configService.getConfig();
       if (currentConfig === null) {
         // build a cfg object
@@ -101,7 +101,7 @@ export class PanelDialogComponent implements OnInit {
   }
 
 
-  updateSelectableWidgets(event?: any): void {
+  updateSelectableWidgets(event: any): void {
     // se l'utente cambia la dimensione della griglia, lo fa magari perché vuole
     // più widget, perciò resetto il messaggio di errore
     this.widgetsOverflowError = '';
