@@ -23,40 +23,15 @@ in quanto così facendo vado a sovrascrivere il font-size
     font-size: 24px;
 }
 
-.mat-column-distance, .mat-column-course {
+.mat-column-distance,
+.mat-column-bearing,
+.mat-column-latitude,
+.mat-column-longitude,
+.mat-column-time {
     text-align: center;
 }
 
-.sm-table {
-    border-collapse: collapse;
-    width: 100%;
-    max-width: 500px;
-    margin-top: 60px;
-    margin-left: 0;
-}
-
-.sm-table > tr:first-child {
-    border-top: 1px solid gainsboro;
-}
-
-.sm-row {
-    border-bottom: 1px solid gainsboro;
-}
-
-.sm-row > td:first-child {
-    font-weight: bold;
-    font-size: 24px;
-}
-
-.sm-row > td:nth-child(2) {
-    font-size: 20px;
-}
-
-.sm-data {
-    padding: 5px;
-    /* font-weight: bold; */
-}
-
+/* Tablet screen */
 @media screen and (min-width: 601px) and (max-width: 1024px) {
     .mat-header-cell {
         font-size: 16px;
@@ -75,29 +50,35 @@ in quanto così facendo vado a sovrascrivere il font-size
 }
 
 /* Smartphone screen */
-@media screen and (max-width: 600px) {
-    table {
-        width: 100%;
-        border-collapse: collapse;
-        margin-top: 30px;
-    }
+.rotate-text {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
 
-    th {
-        font-size: 14px;
-    }
+#small-table {
+    margin-top: 15px;
+    border-collapse: collapse;
+}
 
-    /* separate column */
-    #table-sm .sm-td + .sm-td { border-left: 1px solid gainsboro;}
+.small-header {
+    text-transform: uppercase;
+}
 
-    td {
-        text-align: center;
-        padding: 5px 0;
-    }
+.device-row {
+    border-bottom: 1px solid gainsboro;
+}
 
-    .sm-label {
-        width: 1%;
-        white-space: pre-wrap;
-    }
+.small-label {
+    font-weight: bold;
+    text-transform: uppercase;
+    padding: 5px 0;
+}
+
+.small-cell {
+    text-align: center;
 }
 
   
