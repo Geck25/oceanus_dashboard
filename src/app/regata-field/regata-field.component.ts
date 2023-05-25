@@ -29,17 +29,18 @@ interface DeviceInformation {
   }
 })
 export class RegataFieldComponent implements OnInit {
+  isPortrait: boolean = true;
+  isDesktop:boolean;
   response: any;
   apiSubscription: Subscription;
   devices : DeviceInformation[] = [];
+  dColumns: string[] = ['label', 'latitude', 'longitude', 'distance', 'bearing', 'time', 'sog', 'cog'];
   dColumns: string[] = ['label', 'latitude', 'longitude', 'distance', 'bearing', 'time', 'sog', 'cog'];
   isSmallScreen: boolean = false;
   // Angle Start Line - PIN Line
   asl_pl: number;
   // Angle PIN OFFSET - PIN Line
   apo_pl: number;
-  isPortrait: boolean = true;
-  isDesktop: boolean;
 
   emptyRows: DeviceInformation[] = [
     {label: 'Offset Mark', latitude: '', longitude: '', distance: '',course: '', time: '', sog: '', cog: ''},
@@ -116,6 +117,18 @@ export class RegataFieldComponent implements OnInit {
         });
       })
     ).subscribe();
+  }
+
+  private isMobile(): boolean {
+    return this.deviceDetector.isMobile();
+  }
+
+  private isDesktopDevice(): boolean {
+    return this.deviceDetector.isDesktop();
+  }
+
+  private getOrientation(): string {
+    return this.deviceDetector.orientation;
   }
 
   private calcDistance(deviceInfo: string[]): string {
