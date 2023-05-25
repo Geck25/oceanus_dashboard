@@ -5,7 +5,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-//import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { WidgetComponent } from './widget/widget.component';
 import { TabbarComponent } from './tabbar/tabbar.component';
@@ -51,7 +51,7 @@ import { MatTableModule } from '@angular/material/table';
     ReactiveFormsModule,
     AppRoutingModule,
     HttpClientModule,
-    //NoopAnimationsModule,
+    NoopAnimationsModule,
     MatTabsModule,
     MatButtonModule,
     MatFormFieldModule,
