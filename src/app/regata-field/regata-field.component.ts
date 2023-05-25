@@ -1,7 +1,8 @@
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { Subscription, timer, map } from 'rxjs';
 import { TelemetryService } from '../services/telemetry.service';
+import { DeviceDetectorService } from 'ngx-device-detector';
 import { 
   distanceBetweenTwoPoints, 
   bearingBetweenTwoPoints, 
@@ -22,18 +23,23 @@ interface DeviceInformation {
 @Component({
   selector: 'app-regata-field',
   templateUrl: './regata-field.component.html',
-  styleUrls: ['./regata-field.component.css']
+  styleUrls: ['./regata-field.component.css'],
+  host: {
+    class: 'fh'
+  }
 })
 export class RegataFieldComponent implements OnInit {
   response: any;
   apiSubscription: Subscription;
   devices : DeviceInformation[] = [];
-  dColumns: string[] = ['label', 'latitude', 'longitude', 'distance', 'course', 'time', 'sog', 'cog'];
+  dColumns: string[] = ['label', 'latitude', 'longitude', 'distance', 'bearing', 'time', 'sog', 'cog'];
   isSmallScreen: boolean = false;
   // Angle Start Line - PIN Line
   asl_pl: number;
   // Angle PIN OFFSET - PIN Line
   apo_pl: number;
+  isPortrait: boolean = true;
+  isDesktop: boolean;
 
   emptyRows: DeviceInformation[] = [
     {label: 'Offset Mark', latitude: '', longitude: '', distance: '',course: '', time: '', sog: '', cog: ''},
@@ -48,17 +54,31 @@ export class RegataFieldComponent implements OnInit {
 
   constructor(
     private telemetryService: TelemetryService,
-    private breakPoint: BreakpointObserver) { }
+    private breakPoint: BreakpointObserver,
+    private deviceDetector: DeviceDetectorService) { }
 
+  /**
+   * Tutta sta logica è da rivedere perché non mi convince
+   */
   ngOnInit(): void {
-    this.breakPoint.observe([
-      Breakpoints.XSmall
-    ]).subscribe(result => {
-      this.isSmallScreen = false;
-      if (result.matches) { 
-        this.isSmallScreen = true; 
+    if (this.isDesktopDevice() || this.isTablet()) {
+      this.isDesktop = true;
+      if (this.getOrientation() === 'landscape') {
+        this.isPortrait = false;
       }
-    })
+    } else if (this.isMobile() && this.getOrientation() === 'landscape') {
+      this.isDesktop = false;
+      this.isPortrait = false;
+    }
+
+    // this.breakPoint.observe([
+    //   Breakpoints.XSmall
+    // ]).subscribe(result => {
+    //   this.isSmallScreen = false;
+    //   if (result.matches) { 
+    //     this.isSmallScreen = true; 
+    //   }
+    // })
 
 
     this.apiSubscription = timer(0, 2000).pipe(
@@ -136,6 +156,27 @@ export class RegataFieldComponent implements OnInit {
     let coordAsFloat = parseFloat(coord);
     let converted = gradiDecimaliToGradiMinuti(coordAsFloat);
     return converted;
+  }
+
+  private isMobile(): boolean {
+    return this.deviceDetector.isMobile();
+  }
+
+  private isDesktopDevice(): boolean {
+    return this.deviceDetector.isDesktop();
+  }
+
+  private isTablet(): boolean {
+    return this.deviceDetector.isTablet();
+  }
+
+  private getOrientation(): string {
+    return this.deviceDetector.orientation;
+  }
+
+  @HostListener('window:orientationchange', ['$event'])
+  onOrientationChange(event: DeviceOrientationEvent) {
+    this.isPortrait = !this.isPortrait;
   }
 
   ngOnDestroy(): void {
