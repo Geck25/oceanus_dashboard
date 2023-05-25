@@ -35,7 +35,6 @@ export class RegataFieldComponent implements OnInit {
   apiSubscription: Subscription;
   devices : DeviceInformation[] = [];
   dColumns: string[] = ['label', 'latitude', 'longitude', 'distance', 'bearing', 'time', 'sog', 'cog'];
-  dColumns: string[] = ['label', 'latitude', 'longitude', 'distance', 'bearing', 'time', 'sog', 'cog'];
   isSmallScreen: boolean = false;
   // Angle Start Line - PIN Line
   asl_pl: number;
@@ -171,20 +170,8 @@ export class RegataFieldComponent implements OnInit {
     return converted;
   }
 
-  private isMobile(): boolean {
-    return this.deviceDetector.isMobile();
-  }
-
-  private isDesktopDevice(): boolean {
-    return this.deviceDetector.isDesktop();
-  }
-
   private isTablet(): boolean {
     return this.deviceDetector.isTablet();
-  }
-
-  private getOrientation(): string {
-    return this.deviceDetector.orientation;
   }
 
   @HostListener('window:orientationchange', ['$event'])
