@@ -25,7 +25,7 @@
 }
 
 #short-name-tablet {
-    text-transform: uppercase;
+    text-transform: capitalize;
     font-weight: bold;
     font-size: 40px;
 }

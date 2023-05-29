@@ -20,7 +20,7 @@
         </button>
         <div #panelOptions class="dropdown-options">
             <a (click)="openConfirmDialog()">Delete</a>
-        </div>
+        </div> 
     </div>
     
 </div>
@@ -51,7 +51,7 @@
 <!-- Confirmation modal -->
 <div #confirmModal class="modal">
     <div class="content">
-        <p>Sei sicuro di voler cancellare il pannello?</p>
+        <p>Sei sicuro di voler <span style="color: red;font-weight:bold;">cancellare</span> il pannello?</p>
         <div class="buttons">
             <button mat-raised-button (click)="deletePanel()">
                 <span id="warn">Si</span> 

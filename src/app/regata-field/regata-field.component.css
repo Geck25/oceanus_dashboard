@@ -1,4 +1,4 @@
-.first-table {
+table {
     width: 100%;
     margin: 0 auto;
     margin-top: 30px;
@@ -31,30 +31,7 @@ in quanto così facendo vado a sovrascrivere il font-size
     text-align: center;
 }
 
-.second-table {
-    width: 100%;
-    margin: 0 auto;
-    max-width: 800px;
-    margin-top: 45px;
-    border: 1px solid gainsboro;
-    border-collapse: collapse;
-}
-
-/* Seleziono tutti i td della prima riga della seconda tabella */
-.first > * {
-    border-bottom: 1px solid gainsboro;
-}
-
-.second-label {
-    font-weight: bold;
-    font-size: 24px;
-    padding: 10px 10px;
-}
-
-.sm-data {
-    font-size: 20px;
-}
-
+/* Tablet screen */
 @media screen and (min-width: 601px) and (max-width: 1024px) {
     .mat-header-cell {
         font-size: 16px;
@@ -82,7 +59,6 @@ in quanto così facendo vado a sovrascrivere il font-size
 }
 
 #small-table {
-    width: 100%;
     margin-top: 15px;
     border-collapse: collapse;
 }
@@ -91,7 +67,7 @@ in quanto così facendo vado a sovrascrivere il font-size
     text-transform: uppercase;
 }
 
-.device-row {    
+.device-row {
     border-bottom: 1px solid gainsboro;
 }
 
@@ -99,24 +75,10 @@ in quanto così facendo vado a sovrascrivere il font-size
     font-weight: bold;
     text-transform: uppercase;
     padding: 5px 0;
-    padding-left: 10px;
 }
 
 .small-cell {
     text-align: center;
-}
-
-.second-small-table {
-    display: flex;
-    justify-content: space-evenly;
-    margin: 20px auto;
-    width: 100%;
-    max-width: 500px;
-    border: 1px solid gainsboro;
-}
-
-.second-small-table > p {
-    padding: 5px;
 }
 
   

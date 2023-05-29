@@ -25,7 +25,7 @@ interface DeviceInformation {
   templateUrl: './regata-field.component.html',
   styleUrls: ['./regata-field.component.css'],
   host: {
-    class: 'fh'
+    class: "fh"
   }
 })
 export class RegataFieldComponent implements OnInit {
@@ -57,28 +57,22 @@ export class RegataFieldComponent implements OnInit {
     private breakPoint: BreakpointObserver,
     private deviceDetector: DeviceDetectorService) { }
 
-  /**
-   * Tutta sta logica è da rivedere perché non mi convince
-   */
   ngOnInit(): void {
-    if (this.isDesktopDevice() || this.isTablet()) {
+    if (this.isDesktopDevice()) {
       this.isDesktop = true;
-      if (this.getOrientation() === 'landscape') {
-        this.isPortrait = false;
-      }
-    } else if (this.isMobile() && this.getOrientation() === 'landscape') {
+    } else if (this.isMobile() && this.getOrientation() === "landscape") {
       this.isDesktop = false;
       this.isPortrait = false;
     }
 
-    // this.breakPoint.observe([
-    //   Breakpoints.XSmall
-    // ]).subscribe(result => {
-    //   this.isSmallScreen = false;
-    //   if (result.matches) { 
-    //     this.isSmallScreen = true; 
-    //   }
-    // })
+/*     this.breakPoint.observe([
+      Breakpoints.XSmall
+    ]).subscribe(result => {
+      this.isSmallScreen = false;
+      if (result.matches) { 
+        this.isSmallScreen = true; 
+      }
+    }) */
 
 
     this.apiSubscription = timer(0, 2000).pipe(
@@ -170,12 +164,8 @@ export class RegataFieldComponent implements OnInit {
     return converted;
   }
 
-  private isTablet(): boolean {
-    return this.deviceDetector.isTablet();
-  }
-
-  @HostListener('window:orientationchange', ['$event'])
-  onOrientationChange(event: DeviceOrientationEvent) {
+  @HostListener("window:orientationchange")
+  onOrientationChange(): void {
     this.isPortrait = !this.isPortrait;
   }
 

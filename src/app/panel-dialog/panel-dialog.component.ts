@@ -22,7 +22,10 @@ export class PanelDialogComponent implements OnInit {
 
   dimensions: Map<string, number[]> = new Map([
     ['2x2', [2, 2]],
-    ['3x3', [3, 3]]
+    ['3x3', [3, 3]],
+    ['4x3', [4, 3]],
+    ['4x4', [4, 4]]
+    
   ]);
 
   constructor(

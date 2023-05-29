@@ -1,15 +1,23 @@
-import { Component, OnInit, ViewChild, ElementRef, HostListener, ViewChildren, QueryList } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, HostListener, ViewChildren, QueryList, Injectable } from '@angular/core';
 import { ConfigService } from '../services/config.service';
 import { ToggleButtonComponent } from '../toggle.button/toggle.button.component';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { NavigationEnd, Router } from '@angular/router';
 
 
+interface Configuration {
+  namePanel: string,
+  col: number, 
+  row: number,
+  selectedMeasurement: string[]
+}
+
 @Component({
   selector: 'app-tabbar',
   templateUrl: './tabbar.component.html',
   styleUrls: ['./tabbar.component.css']
 })
+
 export class TabbarComponent implements OnInit {
   tabs: string[] = [];
   selectedButton: ToggleButtonComponent | null = null;
@@ -18,6 +26,7 @@ export class TabbarComponent implements OnInit {
   @ViewChild('modal') modal: ElementRef<HTMLDivElement>;
   useSideNav: boolean = false;
   currentEndpoint: string = '';
+  configurations: Configuration[] = [];
 
   constructor(
     private configService: ConfigService,
@@ -28,6 +37,7 @@ export class TabbarComponent implements OnInit {
   ngOnInit(): void {
     let cfg = this.configService.getConfig();
     let cfgObject = JSON.parse(cfg!); 
+   
     for (const [key, value] of Object.entries(cfgObject)) {
       this.tabs.push(key);
     }
@@ -45,6 +55,9 @@ export class TabbarComponent implements OnInit {
         this.currentEndpoint = endpoint.substring(endpoint.lastIndexOf('/') + 1);
       }
     })
+
+   
+   
   }
 
 
@@ -105,5 +118,7 @@ export class TabbarComponent implements OnInit {
     }
   }
 
+
+  
 }
 

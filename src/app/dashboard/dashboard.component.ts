@@ -1,21 +1,20 @@
 import { BreakpointObserver } from '@angular/cdk/layout';
-import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, HostListener, OnInit, ViewChild} from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { map, Subscription, timer } from 'rxjs';
 import { ConfigService } from '../services/config.service';
 import { TelemetryService } from '../services/telemetry.service';
 import { measures } from '../utils/measure';
 
-
-
 @Component({
-  selector: 'app-dashboard',
+  selector: 'app-dashboard', 
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css'],
   host: {
     class: 'fh'
   }
 })
+
 export class DashboardComponent implements OnInit {
   private subscription: Subscription = Subscription.EMPTY;
   response: any = null;
@@ -64,6 +63,8 @@ export class DashboardComponent implements OnInit {
         });
       })
     ).subscribe();
+
+   
   }
 
 

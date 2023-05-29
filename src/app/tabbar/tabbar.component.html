@@ -9,8 +9,12 @@
         <toggle-button endPoint="/regata-field">
             <span>Regata Field</span>
         </toggle-button>
+
     </div>
-    <button mat-raised-button (click)="openDialog()">Aggiungi pannello</button>
+    <div class="panels-buttons">
+        <toggle-button mat-raised-button routerLink="/configurations">Gestisci Configurazioni</toggle-button>                 
+        <button mat-raised-button (click)="openDialog()">Aggiungi pannello</button>
+    </div>
 </div>
 <mat-divider></mat-divider>
 

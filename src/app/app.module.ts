@@ -5,7 +5,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+//import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { WidgetComponent } from './widget/widget.component';
 import { TabbarComponent } from './tabbar/tabbar.component';
@@ -17,6 +18,7 @@ import { HomeComponent } from './home/home.component';
 import { ToggleButtonComponent } from './toggle.button/toggle.button.component';
 import { CompassWidgetComponent } from './compass-widget/compass-widget.component';
 import { RegataFieldComponent } from './regata-field/regata-field.component';
+
 
 /** Angular Material Imports */
 import { MatTabsModule } from '@angular/material/tabs';
@@ -32,6 +34,11 @@ import { LayoutModule } from '@angular/cdk/layout';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { MatTableModule } from '@angular/material/table';
+import { ConfigurationComponent } from './configuration/configuration.component';
+import { MatExpansionModule, MatExpansionPanel } from '@angular/material/expansion';
+import { MatCardModule } from '@angular/material/card';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+
 
 @NgModule({
   declarations: [
@@ -45,13 +52,15 @@ import { MatTableModule } from '@angular/material/table';
     ToggleButtonComponent,
     CompassWidgetComponent,
     RegataFieldComponent,
+    ConfigurationComponent
   ],
   imports: [
     BrowserModule,
     ReactiveFormsModule,
     AppRoutingModule,
     HttpClientModule,
-    NoopAnimationsModule,
+    //NoopAnimationsModule,
+    BrowserAnimationsModule,
     MatTabsModule,
     MatButtonModule,
     MatFormFieldModule,
@@ -65,6 +74,9 @@ import { MatTableModule } from '@angular/material/table';
     MatIconModule,
     MatListModule,
     MatTableModule,
+    MatExpansionModule, 
+    MatCardModule,
+    MatSnackBarModule
   ],
   exports: [
     MatFormFieldModule,

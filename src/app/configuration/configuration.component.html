@@ -1,0 +1,160 @@
+<div class="title">
+  <h1>Configurazione attuale</h1>
+</div>
+<div class="currentConfig" *ngIf="numLocalPanels > 0; else noLocalPanels">
+  <div class="containerPanel" >
+    <mat-card class="panel-card" *ngFor="let localcfg of localConfigurations | keyvalue">
+      <mat-card-header>
+        <mat-card-title>{{ localcfg.key }}</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <mat-chip-list>
+          <mat-chip  *ngFor="let measure of localcfg.value.measures" class="measure-chip" >
+            {{ measure }}
+          </mat-chip>
+        </mat-chip-list>
+      </mat-card-content>
+    </mat-card>
+  </div>  
+  <div class="saveButton">
+    <button mat-raised-button (click)="openConfirmInputDialog()">
+      Salva configurazione
+    </button>
+    <button mat-raised-button (click)="openConfirmPanelsDialog()">
+      Elimina tutti i pannelli
+    </button>
+  </div>
+</div>
+
+<!-- MODULO CONFERMA SALVATAGGIO CONFIGURAZIONE -->
+<div #nameConf class="inputName">
+  <div class="content">
+      <p>Inserisci il nome della configurazione</p>
+      <div class="inputContainer">
+        <mat-form-field class="form" appereance="fill">
+          <mat-label>Nome Configurazione</mat-label>
+          <input matInput type="text" [formControl]="configName">
+          <mat-error *ngIf="configName.invalid"></mat-error>
+        </mat-form-field >
+    </div>
+      <div class="buttonsInput">
+          <button mat-raised-button (click)="uploadConfiguration()">
+              <span id="save">Salva</span> 
+          </button>
+          <button mat-raised-button (click)="closeConfirmInputDialog()">Annulla</button>
+      </div>
+  </div>
+</div>
+
+<!-- MODULO CONFERMA ELIMINAZIONE PANNELLI -->
+<div #confirmModalPanels class="modal">
+  <div class="content">
+      <p>Sei sicuro di voler <span style="color: red;font-weight:bold;">eliminare</span> tutti i pannelli?</p>
+      <div class="buttons">
+          <button mat-raised-button (click)="deleteAllPanels()">
+              <span id="warn">Si</span> 
+          </button>
+          <button mat-raised-button (click)="closeConfirmPanelsDialog()">No</button>
+      </div>
+  </div>
+</div>
+
+<!-- SE NON CI SONO PANNELLI-->
+<ng-template #noLocalPanels >
+<div class="noPanels">
+  Non ci sono pannelli attivi.
+</div>
+</ng-template>
+
+
+<div class="title">
+  <h1>Configurazioni salvate</h1>
+</div>
+<div class="currentConfig" *ngIf="serverConfigurations.length > 0; else noConfigs">
+<mat-accordion >
+  <mat-expansion-panel *ngFor="let configuration of serverConfigurations">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <strong>{{configuration.id}}</strong>
+      </mat-panel-title>
+      <mat-panel-description>
+        {{numberOfServerPanels(configuration)}} pannelli
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <div class="containerPanel">
+      <div *ngFor="let item of getObjectKeys(configuration)">
+        <ng-container *ngIf="item !== 'id'">
+        <mat-card class="panel-card">
+          <mat-card-header>
+            <mat-card-title>{{ item }}</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <mat-chip-list>
+              <mat-chip *ngFor="let measure of getMeasures(configuration, item)" class="measure-chip">
+                {{measure}}
+              </mat-chip>
+            </mat-chip-list>
+          </mat-card-content>
+        </mat-card>
+
+      </ng-container>
+      </div>
+    </div> 
+    <div class="saveButton">
+      <button mat-raised-button (click)="checkNames(configuration.id)"> Recupera </button>
+      <button mat-raised-button (click)="openConfirmModalDialog(configuration.id)"> Elimina </button>
+    </div>
+  </mat-expansion-panel>
+</mat-accordion>
+</div>
+
+<!-- MODULO SOVRASCRITTURA DI PANNELLI OMONIMI -->
+<div #overwriteModal class="modal">
+  <div class="content">
+    <div class="icon-text">
+      <h2><mat-icon>warning</mat-icon> ATTENZIONE</h2>
+    </div>        
+    <mat-divider></mat-divider>
+      <p> Nella configurazione che si vuole recuperare sono presenti <br> dei <span style="font-weight:bold">pannelli con lo stesso nome</span> 
+         già presenti nella configurazione locale.</p>
+      <p>Tali pannelli verranno <span style="color:red;font-weight:bold">sovrascritti</span> durante il processo di recupero.<br></p>
+      <p>Sei sicuro di voler proseguire? </p>
+      <div class="buttons">
+          <button mat-raised-button (click)="restoreConfiguration();">
+              <span id="warn" >Si</span> 
+          </button>
+          <button mat-raised-button (click)="closeOverwiteModalDialog()">No</button>
+      </div>
+  </div>
+</div>
+
+
+<!-- MODULO CONFERMA PER ELIMINAZIONE CONFIGURAZIONE -->
+<div #confirmModal class="modal">
+  <div class="content">
+      <p>Sei sicuro di voler <span style="color: red;font-weight:bold;">eliminare</span> la configurazione?</p>
+      <div class="buttons">
+          <button mat-raised-button (click)="deleteConfiguration()">
+              <span id="warn" >Si</span> 
+          </button>
+          <button mat-raised-button (click)="closeConfirmModalDialog()">No</button>
+      </div>
+  </div>
+</div>
+
+<!-- SE NON CI SONO CONFIGURAZIONI-->
+<ng-template #noConfigs >
+  <div class="noPanels">
+    Non ci sono pannelli salvati.
+  </div>
+</ng-template>
+
+
+
+
+
+
+
+
+
+
