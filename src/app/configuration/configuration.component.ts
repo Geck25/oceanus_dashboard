@@ -47,7 +47,6 @@ export class ConfigurationComponent  {
       this.serverConfigurations = response;
     });
 
-    console.log(this.localConfigurations, this.localJsonConfigurations, this.serverConfigurations);
 
     //recupero configurazione locale 
     let localcfgObject: any = this.configService.getConfig();
@@ -262,6 +261,5 @@ export class ConfigurationComponent  {
   closeOverwiteModalDialog(): void {
     this.overwriteModal.nativeElement.style.display = 'none';
   }
-  
-  
+
 }
