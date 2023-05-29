@@ -37,6 +37,10 @@ export class TabbarComponent implements OnInit {
   ngOnInit(): void {
     let cfg = this.configService.getConfig();
     let cfgObject = JSON.parse(cfg!); 
+
+    if(cfgObject === null ){
+      cfgObject = [];
+    } 
    
     for (const [key, value] of Object.entries(cfgObject)) {
       this.tabs.push(key);
@@ -117,8 +121,6 @@ export class TabbarComponent implements OnInit {
       this.modal.nativeElement.style.display = 'none';
     }
   }
-
-
   
 }
 
