@@ -18,8 +18,6 @@ import { Router } from '@angular/router';
 
 export class ConfigurationComponent  {
 
-  @ViewChild(MatAccordion) accordion: MatAccordion;
-  private configUrl = 'http://localhost:3000/configurations';
   localConfigurations: any[] = [];
   localJsonConfigurations: any = null;
   serverConfigurations: any[] = [];
@@ -27,6 +25,7 @@ export class ConfigurationComponent  {
   numServerPanels: number = 0;
   currentId: string = '';
   configName = new FormControl<string>('', Validators.required);
+  @ViewChild(MatAccordion) accordion: MatAccordion;
   @ViewChild('confirmModal') confirmModal: ElementRef<HTMLElement>;
   @ViewChild('confirmModalPanels') confirmModalPanels: ElementRef<HTMLElement>;
   @ViewChild('nameConf') nameConf: ElementRef<HTMLElement>;
@@ -36,22 +35,31 @@ export class ConfigurationComponent  {
     private configService: ConfigService,
     private telemetryService: TelemetryService,
     private snackBar: MatSnackBar,
-    private router: Router,
+    private router: Router
   ){}
 
   ngOnInit(): void{
-
+    this.localJsonConfigurations = {};
+    
+  
     //recupero configurazioni sul server
     this.telemetryService.getConfigs().subscribe((response) => {
       this.serverConfigurations = response;
     });
 
-    this.localJsonConfigurations = {};
+    console.log(this.localConfigurations, this.localJsonConfigurations, this.serverConfigurations);
 
     //recupero configurazione locale 
-    let localcfgObject = this.configService.getConfig();
+    let localcfgObject: any = this.configService.getConfig();
     this.localConfigurations = JSON.parse(localcfgObject!); 
-    this.numLocalPanels = Object.keys(this.localConfigurations).length;
+
+    //primo accesso al browser con nessun pannello attivo
+    if(this.localConfigurations === null ){
+      this.localConfigurations = [];
+    } else {
+      this.numLocalPanels = Object.keys(this.localConfigurations).length;
+    }
+    
 
   }
 
@@ -150,6 +158,11 @@ export class ConfigurationComponent  {
   }
 
   checkNames(id: string): void {
+    if (this.serverConfigurations === null) {
+      // Handle the case where serverConfigurations is null, e.g., by displaying an error message
+      
+    }
+  
     let objectServerNames: Object = this.serverConfigurations.find(obj => obj.id === id);
     let serverConfNames = Object.keys(objectServerNames);
     serverConfNames.pop();
@@ -157,7 +170,7 @@ export class ConfigurationComponent  {
     let objectLocalNames = Object.keys(this.localConfigurations);
     let localNamesPanels = JSON.stringify(objectLocalNames);
 
-    this.currentId = id
+    this.currentId = id;
 
     //controllo se recuperando avrei pannelli omonimi
     if(serverConfNames.some(panelName => localNamesPanels.includes(panelName))){
@@ -175,6 +188,7 @@ export class ConfigurationComponent  {
     
     let currentConfig: any = this.configService.getConfig();
     if(currentConfig === null){
+      console.log("entro qua");
       //nel caso in cui non ci siano pannelli o primo accesso al browser
       for(let i = 0; i < keys.length; i++){ 
       
@@ -248,15 +262,6 @@ export class ConfigurationComponent  {
   closeOverwiteModalDialog(): void {
     this.overwriteModal.nativeElement.style.display = 'none';
   }
-
-
-
-
   
-
   
- 
-
-
-
 }
