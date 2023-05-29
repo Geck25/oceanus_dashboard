@@ -1,5 +1,7 @@
 # OceanusDashboard
 
+This version implements the ability to save configurations in a JSON server and retrieve them from any device.
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.2.7.
 
 ## Development server
