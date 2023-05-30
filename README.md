@@ -1,6 +1,6 @@
 # OceanusDashboard
 
-This version is capable of saving a configuration and retrieving it on another device (within the same local network).
+This version is capable of saving a configuration and retrieving it on another device.
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.2.7.
 
