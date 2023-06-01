@@ -41,4 +41,4 @@ A questo punto si può eseguire l'applicazione Angular attraverso il comando:
 ```
 npm start
 ```
-si aprirà automaticamente una pagina nel browser
+in contemporanea si aprirà una pagine nel browser e si avvierà il JSON-server.
